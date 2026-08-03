@@ -20,40 +20,35 @@
   section{padding:80px 0}
   .section-title{font-size:clamp(28px,4vw,40px);text-align:center;margin-bottom:12px}
   .section-sub{text-align:center;color:var(--soft);max-width:560px;margin:0 auto 48px}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:none}
 
   /* Шапка */
-  header{position:sticky;top:0;z-index:50;background:rgba(250,247,241,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header{position:sticky;top:0;z-index:50;background:rgba(23,19,16,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .logo{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:4px;text-decoration:none;color:var(--ink)}
+  .logo{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:4px;text-decoration:none;color:#fff}
   .logo span{color:var(--gold)}
   .nav-links{display:flex;gap:28px;list-style:none}
-  .nav-links a{text-decoration:none;color:var(--soft);font-size:14px;font-weight:500;transition:color .2s}
+  .nav-links a{text-decoration:none;color:#cbbfae;font-size:14px;font-weight:500;transition:color .2s}
   .nav-links a:hover{color:var(--gold)}
-  .cart-btn{position:relative;background:none;border:1px solid var(--ink);border-radius:30px;padding:9px 20px;font-family:inherit;font-size:14px;cursor:pointer;transition:.2s}
-  .cart-btn:hover{background:var(--ink);color:#fff}
+  .cart-btn{position:relative;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:30px;padding:9px 20px;font-family:inherit;font-size:14px;cursor:pointer;transition:.2s}
+  .cart-btn:hover{background:#fff;color:var(--ink)}
   .cart-count{position:absolute;top:-7px;right:-7px;background:var(--gold);color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 4px}
   @media(max-width:760px){.nav-links{display:none}}
 
-  /* Хиро */
-  .hero{padding:90px 0 100px}
-  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  /* Хиро с 3D */
+  .hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(1200px 600px at 70% 20%, #2a2119, #171310 70%)}
+  #silk{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+  .hero-content{position:relative;z-index:2;padding:120px 0 90px}
   .hero-eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:12px;color:var(--gold);font-weight:700;margin-bottom:18px}
-  .hero h1{font-size:clamp(34px,5vw,54px);line-height:1.15;margin-bottom:20px}
-  .hero p{color:var(--soft);font-size:17px;max-width:440px;margin-bottom:32px}
+  .hero h1{font-size:clamp(34px,5vw,56px);line-height:1.15;margin-bottom:20px;color:#fff}
+  .hero p{color:#d8cbb8;font-size:17px;max-width:460px;margin-bottom:32px}
+  .touch-hint{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e8ddcb;border-radius:30px;padding:8px 18px;font-size:13px}
   .btn{display:inline-block;padding:15px 34px;border-radius:40px;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:.25s}
-  .btn-primary{background:var(--ink);color:#fff}
-  .btn-primary:hover{background:var(--gold)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);margin-left:12px}
-  .btn-ghost:hover{background:var(--ink);color:#fff}
-  .hero-visual{position:relative;height:400px}
-  .fold{position:absolute;border-radius:18px;box-shadow:0 24px 50px rgba(38,33,27,.14)}
-  .fold1{width:70%;height:60%;bottom:0;left:0;background:linear-gradient(135deg,#efe9df,#dcd2c0)}
-  .fold2{width:60%;height:52%;bottom:12%;left:20%;background:linear-gradient(135deg,#d9b8b4,#c39a97);z-index:2}
-  .fold3{width:52%;height:44%;bottom:26%;left:42%;background:linear-gradient(135deg,#41503f,#2e4d3f);z-index:3}
-  .hero-badge{position:absolute;z-index:4;top:6%;right:4%;background:#fff;border-radius:50%;width:110px;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(38,33,27,.16);text-align:center}
-  .hero-badge b{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold)}
-  .hero-badge small{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--soft)}
-  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-visual{height:320px;margin-top:10px}}
+  .btn-primary{background:var(--gold);color:#fff}
+  .btn-primary:hover{background:var(--gold-dark)}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);margin-left:12px}
+  .btn-ghost:hover{background:#fff;color:var(--ink)}
 
   /* Преимущества */
   .features{background:#fff;border-block:1px solid var(--line);padding:60px 0}
@@ -63,10 +58,24 @@
   .feat h3{font-size:18px;margin-bottom:6px}
   .feat p{font-size:14px;color:var(--soft)}
 
+  /* Интерактивная ткань */
+  .fabric-zone{position:relative;height:360px;border-radius:24px;overflow:hidden;cursor:crosshair;touch-action:pan-y;
+    background:linear-gradient(135deg,#35594a,#204034 55%,#16281f);box-shadow:0 30px 60px rgba(22,40,31,.35)}
+  .fabric-zone::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 3px,transparent 3px 7px),repeating-linear-gradient(-45deg,rgba(0,0,0,.08) 0 3px,transparent 3px 7px)}
+  .fabric-zone .sheen{position:absolute;inset:0;pointer-events:none;background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.38),transparent 62%);mix-blend-mode:screen}
+  .fabric-zone .caption{position:absolute;left:24px;bottom:20px;z-index:3;color:#eaf4ee;font-size:14px;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);border-radius:14px;padding:10px 16px;pointer-events:none}
+  .lens{position:absolute;z-index:4;width:150px;height:150px;border-radius:50%;border:2px solid rgba(255,255,255,.85);box-shadow:0 10px 30px rgba(0,0,0,.4), inset 0 0 20px rgba(0,0,0,.35);pointer-events:none;opacity:0;transition:opacity .25s;transform:translate(-50%,-50%);
+    background:repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.3) 0 2px,transparent 2px 6px),linear-gradient(135deg,#2a4c3e,#1d3a2e)}
+  .ripple{position:absolute;z-index:2;border:2px solid rgba(255,255,255,.55);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:rip .7s ease-out forwards}
+  @keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0;width:170px;height:170px}}
+  .ripple{width:170px;height:170px}
+
   /* Каталог */
-  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
-  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(38,33,27,.1)}
+  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px;perspective:1200px}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .25s;transform-style:preserve-3d;will-change:transform}
+  .card:hover{box-shadow:0 24px 50px rgba(38,33,27,.16)}
+  .card::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--cx,50%) var(--cy,0%),rgba(255,255,255,.28),transparent 55%);opacity:0;transition:opacity .3s}
+  .card:hover::after{opacity:1}
   .swatch{height:220px;position:relative}
   .swatch::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),repeating-linear-gradient(-45deg,rgba(0,0,0,.035) 0 2px,transparent 2px 5px)}
   .swatch .tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(255,255,255,.9);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;font-weight:700;color:var(--ink)}
@@ -120,7 +129,6 @@
   .wa-btn:hover{background:#1c8a47}
   .cart-note{font-size:12px;color:var(--soft);text-align:center;margin-top:10px}
 
-  /* Тост */
   .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:13px 28px;border-radius:30px;font-size:14px;opacity:0;transition:.35s;z-index:120;pointer-events:none}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -131,8 +139,8 @@
   <div class="wrap nav">
     <a class="logo" href="#">DI<span>V</span>A</a>
     <ul class="nav-links">
+      <li><a href="#touch">Ткань</a></li>
       <li><a href="#catalog">Коллекция</a></li>
-      <li><a href="#about">О ткани</a></li>
       <li><a href="#how">Как заказать</a></li>
       <li><a href="#contacts">Контакты</a></li>
     </ul>
@@ -141,24 +149,18 @@
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="hero-eyebrow">Премиальный сатин · 300 TC</div>
-      <h1>Сон, к которому хочется возвращаться</h1>
-      <p>Постельное бельё из длинноволокнистого хлопка плотностью 300 нитей на дюйм². Шелковистое, дышащее, долговечное.</p>
-      <a href="#catalog" class="btn btn-primary">Смотреть коллекцию</a>
-      <a href="#how" class="btn btn-ghost">Как заказать</a>
-    </div>
-    <div class="hero-visual">
-      <div class="fold fold1"></div>
-      <div class="fold fold2"></div>
-      <div class="fold fold3"></div>
-      <div class="hero-badge"><b>300</b><small>Thread Count</small></div>
-    </div>
+  <canvas id="silk"></canvas>
+  <div class="wrap hero-content">
+    <div class="touch-hint">👆 Проведите по ткани — она отвечает на прикосновение</div>
+    <div class="hero-eyebrow">Премиальный сатин · 300 TC</div>
+    <h1>Сон, к которому хочется возвращаться</h1>
+    <p>Постельное бельё из длинноволокнистого хлопка плотностью 300 нитей на дюйм². Шелковистое, дышащее, долговечное.</p>
+    <a href="#catalog" class="btn btn-primary">Смотреть коллекцию</a>
+    <a href="#touch" class="btn btn-ghost">Потрогать ткань</a>
   </div>
 </section>
 
-<section class="features" id="about">
+<section class="features reveal" id="about">
   <div class="wrap feat-grid">
     <div class="feat"><div class="ico">🌿</div><h3>100% хлопок</h3><p>Длинноволокнистый египетский хлопок без синтетики</p></div>
     <div class="feat"><div class="ico">✨</div><h3>300 TC</h3><p>Высокая плотность: ткань гладкая и при этом дышащая</p></div>
@@ -167,27 +169,39 @@
   </div>
 </section>
 
+<section id="touch">
+  <div class="wrap">
+    <h2 class="section-title reveal">Почувствуйте ткань через экран</h2>
+    <p class="section-sub reveal">Проведите курсором или пальцем: сатин отвечает бликом и рябью. На телефоне вы ощутите лёгкую вибрацию — так DIVA передаёт прикосновение. Наведите лупу, чтобы рассмотреть переплетение нитей.</p>
+    <div class="fabric-zone reveal" id="fabricZone">
+      <div class="sheen"></div>
+      <div class="lens"></div>
+      <div class="caption">🔍 Изумрудный сатин · ведите пальцем — ткань оживает</div>
+    </div>
+  </div>
+</section>
+
 <section id="catalog">
   <div class="wrap">
-    <h2 class="section-title">Коллекция</h2>
-    <p class="section-sub">Шесть благородных оттенков. Выберите размер — и комплект отправится в корзину.</p>
+    <h2 class="section-title reveal">Коллекция</h2>
+    <p class="section-sub reveal">Шесть благородных оттенков. Выберите размер — и комплект отправится в корзину.</p>
     <div class="catalog-grid" id="catalogGrid"></div>
   </div>
 </section>
 
 <section class="steps" id="how">
   <div class="wrap">
-    <h2 class="section-title">Как заказать</h2>
-    <p class="section-sub">Всё просто — три шага до идеального сна</p>
+    <h2 class="section-title reveal">Как заказать</h2>
+    <p class="section-sub reveal">Всё просто — три шага до идеального сна</p>
     <div class="steps-grid">
-      <div class="step"><div class="num">1</div><h3>Выберите комплект</h3><p>Цвет и размер — в карточках товара выше</p></div>
-      <div class="step"><div class="num">2</div><h3>Добавьте в корзину</h3><p>Нажмите «В корзину» — заказ соберётся автоматически</p></div>
-      <div class="step"><div class="num">3</div><h3>Оформите в WhatsApp</h3><p>Мы подтвердим заказ, оплату и доставку по всей России</p></div>
+      <div class="step reveal"><div class="num">1</div><h3>Выберите комплект</h3><p>Цвет и размер — в карточках товара выше</p></div>
+      <div class="step reveal"><div class="num">2</div><h3>Добавьте в корзину</h3><p>Нажмите «В корзину» — заказ соберётся автоматически</p></div>
+      <div class="step reveal"><div class="num">3</div><h3>Оформите в WhatsApp</h3><p>Мы подтвердим заказ, оплату и доставку по всей России</p></div>
     </div>
   </div>
 </section>
 
-<section class="contacts" id="contacts">
+<section class="contacts reveal" id="contacts">
   <div class="wrap">
     <h2 class="section-title">Остались вопросы?</h2>
     <p class="section-sub">Напишите нам — поможем подобрать размер и цвет</p>
@@ -219,10 +233,11 @@
 
 <div class="toast" id="toast">Добавлено в корзину ✓</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ====== ВАШИ КОНТАКТЫ ====== */
-const PHONE = '79236316136';  // WhatsApp
-const TELEGRAM = 'Stykket';   // Telegram
+const PHONE = '79236316136';
+const TELEGRAM = 'Stykket';
 /* =========================== */
 
 const SIZES = [
@@ -231,7 +246,6 @@ const SIZES = [
   { name:'Евро',         price:12900 },
   { name:'Семейный',     price:13900 },
 ];
-
 const PRODUCTS = [
   { id:1, name:'Белый жемчуг',    desc:'Классический тёплый белый',     color:'#efe9df' },
   { id:2, name:'Слоновая кость',  desc:'Нежный кремово-золотистый',     color:'#e5d8bf' },
@@ -242,13 +256,98 @@ const PRODUCTS = [
 ];
 
 const fmt = n => n.toLocaleString('ru-RU') + ' ₽';
-const cart = []; // {id, size, price, qty}
+const cart = [];
 
-/* Рендер каталога */
+/* ---------- 3D ШАТИН (Three.js) ---------- */
+(function initSilk(){
+  const canvas = document.getElementById('silk');
+  if(!window.THREE){ canvas.style.display='none'; return; }
+  try{
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 2, .1, 100);
+    camera.position.set(0,0,9);
+    const mobile = innerWidth < 700;
+    const geo = new THREE.PlaneGeometry(17,9, mobile?90:140, mobile?50:80);
+    const mat = new THREE.MeshStandardMaterial({color:0xb08d57, roughness:.32, metalness:.55, side:THREE.DoubleSide});
+    const mesh = new THREE.Mesh(geo,mat);
+    mesh.rotation.x = -0.35;
+    scene.add(mesh);
+    scene.add(new THREE.AmbientLight(0xffffff,.35));
+    const l1 = new THREE.DirectionalLight(0xffe0b0,1.1); l1.position.set(3,4,6); scene.add(l1);
+    const l2 = new THREE.DirectionalLight(0x8fb0ff,.45); l2.position.set(-4,-2,4); scene.add(l2);
+    const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+    const ripples = [];
+    const start = performance.now(), now = () => (performance.now()-start)/1000;
+    function resize(){
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setSize(w,h,false); camera.aspect = w/h; camera.updateProjectionMatrix();
+    }
+    addEventListener('resize', resize); resize();
+    canvas.parentElement.addEventListener('pointermove', e=>{
+      const r = canvas.getBoundingClientRect();
+      mouse.x = ((e.clientX-r.left)/r.width)*2-1;
+      mouse.y = -((e.clientY-r.top)/r.height)*2+1;
+      ray.setFromCamera(mouse,camera);
+      const hit = ray.intersectObject(mesh)[0];
+      if(hit){
+        const p = mesh.worldToLocal(hit.point.clone());
+        ripples.push({x:p.x, y:p.y, t:now()});
+        if(ripples.length>7) ripples.shift();
+      }
+    });
+    const pos = geo.attributes.position;
+    (function tick(){
+      const t = now();
+      while(ripples.length && t-ripples[0].t > 2.2) ripples.shift();
+      for(let i=0;i<pos.count;i++){
+        const x = pos.getX(i), y = pos.getY(i);
+        let z = .28*Math.sin(x*.55+t*.9)*Math.cos(y*.6+t*.7)
+              + .12*Math.sin(x*1.6-t*1.3)*Math.sin(y*1.2+t*.9);
+        for(const r of ripples){
+          const age = t-r.t, d = Math.hypot(x-r.x, y-r.y);
+          z += Math.sin(d*4-age*7)*Math.exp(-d*.9)*Math.exp(-age*1.6)*.3;
+        }
+        pos.setZ(i,z);
+      }
+      pos.needsUpdate = true; geo.computeVertexNormals();
+      renderer.render(scene,camera);
+      requestAnimationFrame(tick);
+    })();
+  }catch(e){ canvas.style.display='none'; }
+})();
+
+/* ---------- ИНТЕРАКТИВНЫЙ ОБРАЗЕЦ ТКАНИ ---------- */
+(function initFabric(){
+  const zone = document.getElementById('fabricZone');
+  const lens = zone.querySelector('.lens');
+  let lastRip = 0, lastVib = 0;
+  zone.addEventListener('pointermove', e=>{
+    const r = zone.getBoundingClientRect();
+    const x = e.clientX-r.left, y = e.clientY-r.top;
+    zone.style.setProperty('--mx', x+'px');
+    zone.style.setProperty('--my', y+'px');
+    lens.style.opacity = 1; lens.style.left = x+'px'; lens.style.top = y+'px';
+    const t = Date.now();
+    if(t-lastRip > 130){
+      const s = document.createElement('span');
+      s.className = 'ripple'; s.style.left = x+'px'; s.style.top = y+'px';
+      zone.appendChild(s); setTimeout(()=>s.remove(), 750);
+      lastRip = t;
+    }
+    if(e.pointerType==='touch' && navigator.vibrate && t-lastVib > 90){
+      navigator.vibrate(4); lastVib = t;   // тактильная отдача на телефоне
+    }
+  });
+  zone.addEventListener('pointerleave', ()=> lens.style.opacity = 0);
+})();
+
+/* ---------- КАТАЛОГ ---------- */
 const grid = document.getElementById('catalogGrid');
 PRODUCTS.forEach(p => {
   const card = document.createElement('div');
-  card.className = 'card';
+  card.className = 'card reveal';
   card.dataset.size = SIZES[0].name;
   card.innerHTML = `
     <div class="swatch" style="background:linear-gradient(135deg, ${p.color}, ${shade(p.color)})">
@@ -266,14 +365,34 @@ PRODUCTS.forEach(p => {
       </div>
     </div>`;
   grid.appendChild(card);
+  addTilt(card);
 });
 
-function shade(hex){ // чуть темнее для градиента
+function shade(hex){
   const n = parseInt(hex.slice(1),16);
   const f = c => Math.max(0, Math.round(c*0.86));
   return `rgb(${f(n>>16)},${f(n>>8&255)},${f(n&255)})`;
 }
 
+/* ---------- 3D-НАКЛОН КАРТОЧЕК ---------- */
+function addTilt(el){
+  el.addEventListener('pointermove', e=>{
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX-r.left)/r.width-.5, py = (e.clientY-r.top)/r.height-.5;
+    el.style.setProperty('--cx', (e.clientX-r.left)+'px');
+    el.style.setProperty('--cy', (e.clientY-r.top)+'px');
+    el.style.transform = `perspective(900px) rotateY(${px*7}deg) rotateX(${-py*7}deg) translateY(-4px)`;
+  });
+  el.addEventListener('pointerleave', ()=> el.style.transform = '');
+}
+
+/* ---------- ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ ---------- */
+const io = new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- КОРЗИНА И ЗАКАЗ ---------- */
 function pickSize(btn, name, price){
   const card = btn.closest('.card');
   card.querySelectorAll('.size-pill').forEach(b=>b.classList.remove('active'));
@@ -281,7 +400,6 @@ function pickSize(btn, name, price){
   card.dataset.size = name;
   card.querySelector('.price').textContent = fmt(price);
 }
-
 function addToCart(id, btn){
   const size = btn.closest('.card').dataset.size;
   const price = SIZES.find(s=>s.name===size).price;
@@ -289,46 +407,35 @@ function addToCart(id, btn){
   found ? found.qty++ : cart.push({id, size, price, qty:1});
   updateCart(); showToast();
 }
-
-function changeQty(idx, d){
-  cart[idx].qty += d;
-  if(cart[idx].qty<=0) cart.splice(idx,1);
-  updateCart();
-}
+function changeQty(idx, d){ cart[idx].qty += d; if(cart[idx].qty<=0) cart.splice(idx,1); updateCart(); }
 function removeItem(idx){ cart.splice(idx,1); updateCart(); }
-
 function updateCart(){
   const box = document.getElementById('cartItems');
-  const count = cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cartCount').textContent = count;
-  if(!cart.length){
-    box.innerHTML = '<div class="cart-empty">Корзина пока пуста.<br>Выберите комплект из коллекции 🤍</div>';
-  } else {
-    box.innerHTML = cart.map((i,idx)=>{
-      const p = PRODUCTS.find(x=>x.id===i.id);
-      return `<div class="cart-item">
-        <div>
-          <div class="ci-name">«${p.name}»</div>
-          <div class="ci-size">Размер: ${i.size}</div>
-          <div class="ci-controls">
-            <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
-            <span>${i.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
-            <button class="ci-remove" onclick="removeItem(${idx})">убрать</button>
+  document.getElementById('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0);
+  box.innerHTML = !cart.length
+    ? '<div class="cart-empty">Корзина пока пуста.<br>Выберите комплект из коллекции 🤍</div>'
+    : cart.map((i,idx)=>{
+        const p = PRODUCTS.find(x=>x.id===i.id);
+        return `<div class="cart-item">
+          <div>
+            <div class="ci-name">«${p.name}»</div>
+            <div class="ci-size">Размер: ${i.size}</div>
+            <div class="ci-controls">
+              <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+              <span>${i.qty}</span>
+              <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+              <button class="ci-remove" onclick="removeItem(${idx})">убрать</button>
+            </div>
           </div>
-        </div>
-        <div class="ci-price">${fmt(i.price*i.qty)}</div>
-      </div>`;
-    }).join('');
-  }
+          <div class="ci-price">${fmt(i.price*i.qty)}</div>
+        </div>`;
+      }).join('');
   document.getElementById('cartTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
 }
-
 function toggleCart(open){
   document.getElementById('cartPanel').classList.toggle('open', open);
   document.getElementById('overlay').classList.toggle('show', open);
 }
-
 function checkout(){
   if(!cart.length){ showToast('Корзина пуста'); return; }
   const lines = ['Здравствуйте! Хочу заказать постельное бельё DIVA:'];
@@ -339,7 +446,6 @@ function checkout(){
   lines.push(`Итого: ${fmt(cart.reduce((s,i)=>s+i.price*i.qty,0))}`);
   window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
 }
-
 function showToast(msg='Добавлено в корзину ✓'){
   const t = document.getElementById('toast');
   if(msg) t.textContent = msg;
@@ -355,5 +461,7 @@ document.getElementById('phoneLink').textContent = '+7 923 631-61-36';
 
 updateCart();
 </script>
+</body>
+</html>
 </body>
 </html>
