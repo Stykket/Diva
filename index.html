@@ -4,7 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DIVA — искусство сна</title>
-<meta name="description" content="DIVA. Сатин 300–500 TC, мытый хлопок, лён, бамбук. OEKO-TEX®. Ничего лишнего.">
+<meta name="description" content="DIVA. Постельное бельё 300 TC. Чёрный сатин. Ничего лишнего.">
+<meta name="theme-color" content="#050505">
+<meta property="og:title" content="DIVA — искусство сна">
+<meta property="og:description" content="Постельное бельё 300 TC. Чёрный сатин. Ничего лишнего.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=1200&auto=format&fit=crop">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
@@ -19,36 +24,45 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--gold);color:#000}
+  img{display:block}
   a{color:inherit;text-decoration:none}
-  button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer}
+  a:focus-visible,button:focus-visible,.btn:focus-visible{outline:1px solid var(--gold);outline-offset:4px;border-radius:2px}
   .micro{font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--dim);font-weight:300}
   .wrap{max-width:1400px;margin:0 auto;padding:0 5vw}
 
-  /* LOADER */
+  /* subtle film grain — keeps the black from feeling flat/digital */
+  #grain{position:fixed;inset:0;z-index:98;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  }
+
+  /* ---------- LOADER ---------- */
   #loader{position:fixed;inset:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:center}
   #loader span{font-family:var(--serif);font-size:26px;letter-spacing:.55em;color:var(--white);opacity:0;animation:lin 1.4s ease forwards}
   #loader span:nth-child(2){animation-delay:.12s}#loader span:nth-child(3){animation-delay:.24s}#loader span:nth-child(4){animation-delay:.36s}
   @keyframes lin{to{opacity:1}}
 
-  /* CURSOR */
+  /* ---------- CURSOR ---------- */
   #cursor{position:fixed;left:0;top:0;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:99;display:none}
   @media(pointer:fine){#cursor{display:block}}
 
-  /* HEADER */
+  /* ---------- HEADER ---------- */
   header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:26px 5vw;mix-blend-mode:difference}
   .logo{font-family:var(--serif);font-size:18px;letter-spacing:.55em;color:#fff}
-  .head-links{display:flex;gap:34px}
+  .head-links{display:flex;gap:38px}
   .head-links a{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .3s}
   .head-links a:hover{color:#fff}
   @media(max-width:640px){.head-links a:first-child{display:none}}
 
-  /* HERO */
+  /* ---------- HERO ---------- */
   .hero{position:relative;height:100svh;min-height:640px;overflow:hidden;display:flex;align-items:flex-end}
-  .hero-bg{position:absolute;inset:-6%;background:#0a0a0a url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2400&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.5) contrast(1.08) saturate(.85)} /* ← ВАШЕ AI-ФОТО */
+  .hero-bg{position:absolute;inset:-6%;background:#0a0a0a url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2400&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.5) contrast(1.08) saturate(.85)} /* ← ЗАМЕНИТЕ НА ВАШЕ AI-ФОТО */
   .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 45%),radial-gradient(120% 90% at 50% 10%,transparent 40%,rgba(0,0,0,.55))}
   .hero-content{position:relative;z-index:2;padding:0 5vw 12vh;width:100%}
   .hero .micro{display:block;margin-bottom:26px}
-  h1{font-family:var(--serif);font-weight:300;font-size:clamp(52px,10vw,150px);line-height:.98}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(52px,10vw,150px);line-height:.98;letter-spacing:.01em}
   h1 em{font-style:italic;color:var(--gold)}
   .line{overflow:hidden;display:block}
   .line-inner{display:block;will-change:transform}
@@ -56,67 +70,37 @@
   .scroll-hint::after{content:'';position:absolute;inset:0;background:var(--white);transform:translateY(-100%);animation:drop 2.2s cubic-bezier(.76,0,.24,1) infinite}
   @keyframes drop{40%{transform:translateY(0)}100%{transform:translateY(100%)}}
 
-  /* MARQUEE */
-  .marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0}
-  .marquee-inner{display:flex;gap:70px;white-space:nowrap;width:max-content;animation:mq 36s linear infinite}
-  .marquee span{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim)}
-  .marquee i{color:var(--gold);font-style:normal}
-  @keyframes mq{to{transform:translateX(-50%)}}
-
-  /* STATEMENT */
-  .statement{padding:22vh 0}
+  /* ---------- STATEMENT ---------- */
+  .statement{padding:24vh 0}
   .statement .big{font-family:var(--serif);font-weight:300;font-size:clamp(38px,7.4vw,104px);line-height:1.08}
   .statement .big em{font-style:italic;color:var(--dim)}
 
-  /* FABRIC EXPERIENCE */
-  .fab-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;padding:0 5vw 40px}
-  .fab-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5.4vw,72px)}
-  .fab-head h2 em{font-style:italic;color:var(--gold)}
-  .fab-tabs{display:flex;gap:26px;flex-wrap:wrap}
-  .fab-btn{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);padding:8px 2px;border-bottom:1px solid transparent;transition:.3s}
-  .fab-btn.active{color:var(--white);border-color:var(--gold)}
-  .fab-viewer{position:relative;height:72vh;min-height:480px;overflow:hidden;cursor:crosshair;touch-action:pan-y}
-  .fab-viewer .sheen{position:absolute;inset:0;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.30),transparent 62%);mix-blend-mode:screen}
-  .fab-300{background:radial-gradient(120% 100% at 70% 15%,rgba(255,255,255,.10),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 1px,transparent 1px 5px),repeating-linear-gradient(-45deg,rgba(0,0,0,.28) 0 1px,transparent 1px 5px),linear-gradient(140deg,#161312,#0b0a09)}
-  .fab-500{background:radial-gradient(120% 100% at 30% 10%,rgba(255,255,255,.14),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 4px),repeating-linear-gradient(-45deg,rgba(0,0,0,.3) 0 1px,transparent 1px 4px),linear-gradient(140deg,#1a171a,#0c0b0d)}
-  .fab-washed{background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.22) 0 2px,transparent 2px 7px),linear-gradient(140deg,#151210,#0d0b0a)}
-  .fab-linen{background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 6px),linear-gradient(140deg,#1a1612,#0e0c09)}
-  .fab-bamboo{background:radial-gradient(120% 100% at 60% 20%,rgba(170,220,205,.10),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.045) 0 1px,transparent 1px 4px),linear-gradient(140deg,#101413,#0a0d0c)}
-  .lens{position:absolute;z-index:4;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,.7);box-shadow:0 10px 40px rgba(0,0,0,.5),inset 0 0 24px rgba(0,0,0,.4);pointer-events:none;opacity:0;transition:opacity .25s;transform:translate(-50%,-50%);background:repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.32) 0 2px,transparent 2px 6px),#12100e}
-  .ripple{position:absolute;z-index:2;width:170px;height:170px;border:1px solid rgba(255,255,255,.5);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:rip .7s ease-out forwards}
-  @keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
-  .fab-info{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:26px 5vw}
-  #fabName{font-family:var(--serif);font-size:clamp(22px,3vw,34px);font-weight:300}
-  #fabDesc{color:var(--dim);font-size:14px;max-width:460px}
-  #fabFeel{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+  /* ---------- PARALLAX PHOTO ---------- */
+  .ph-wrap{position:relative;height:112vh;overflow:hidden}
+  .ph{position:absolute;inset:-12% 0;background:#0a0a0a url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2200&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.62) contrast(1.05) saturate(.8)} /* ← ФОТО ТКАНИ */
+  .ph-caption{position:absolute;left:5vw;bottom:6vh;z-index:2}
 
-  /* FILM */
-  .film{position:relative;height:110vh;overflow:hidden;background:#000}
-  .film video,.film .film-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6)}
-  .film-fallback{background:#0a0a0a url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2200&auto=format&fit=crop') center/cover no-repeat} /* ← КАДР ИЗ ВАШЕГО ВИДЕО / ФОТО */
-  .film-caption{position:absolute;left:5vw;bottom:6vh;z-index:2}
+  /* ---------- STORY ---------- */
+  .story{padding:4vh 0 18vh}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+  .story-media{aspect-ratio:4/5;background:#0a0a0a url('https://images.unsplash.com/photo-1522771930-78848d9293e8?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.66) contrast(1.05) saturate(.82)} /* ← ФОТО КРУПНЫМ ПЛАНОМ: волокно/шов */
+  .story-text .micro{margin-bottom:22px}
+  .story-copy{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.6vw,32px);line-height:1.45;color:rgba(244,241,234,.86);max-width:34ch}
+  @media(max-width:860px){.story-grid{grid-template-columns:1fr;gap:8vh}.story-media{aspect-ratio:16/11}}
 
-  /* CRAFT */
-  .craft{padding:20vh 0}
-  .craft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-  .craft-item{background:var(--black);padding:44px 34px}
-  .craft-item .n{font-size:11px;letter-spacing:.3em;color:var(--gold)}
-  .craft-item h3{font-family:var(--serif);font-weight:300;font-size:24px;margin:16px 0 10px}
-  .craft-item p{font-size:13px;color:var(--dim);line-height:1.7}
-
-  /* FACTS */
-  .facts{display:flex;justify-content:center;gap:9vw;flex-wrap:wrap;padding:16vh 5vw;text-align:center}
+  /* ---------- FACTS ---------- */
+  .facts{display:flex;justify-content:center;gap:9vw;flex-wrap:wrap;padding:20vh 5vw;text-align:center}
   .fact b{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(44px,6vw,84px);margin-bottom:14px}
   .fact b i{font-style:italic;color:var(--gold)}
 
-  /* CTA */
-  .cta{padding:14vh 5vw 20vh;text-align:center}
+  /* ---------- CTA ---------- */
+  .cta{padding:16vh 5vw 20vh;text-align:center}
   .cta h2{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(34px,5.6vw,72px);margin-bottom:48px}
   .btn{display:inline-block;padding:18px 52px;border:1px solid var(--line);border-radius:100px;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--white);transition:.4s}
   .btn:hover{background:var(--white);color:#000;border-color:var(--white)}
 
   footer{border-top:1px solid var(--line);padding:52px 5vw;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-  footer a:hover{color:var(--white)}
+  footer a{transition:color .3s}footer a:hover{color:var(--white)}
 
   html.lenis,html.lenis body{height:auto}
   .lenis.lenis-smooth{scroll-behavior:auto!important}
@@ -126,12 +110,12 @@
 
 <div id="loader"><span>D</span><span>I</span><span>V</span><span>A</span></div>
 <div id="cursor"></div>
+<div id="grain" aria-hidden="true"></div>
 
 <!-- COMPONENT: Header -->
 <header>
   <a class="logo" href="#">DIVA</a>
   <nav class="head-links">
-    <a href="#fabric">Ткань</a>
     <a href="#collection">Коллекция</a>
     <a href="https://wa.me/79236316136" target="_blank">Связаться</a>
   </nav>
@@ -139,9 +123,9 @@
 
 <!-- COMPONENT: Hero -->
 <section class="hero">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg" id="heroBg" role="img" aria-label="Чёрное сатиновое постельное бельё DIVA крупным планом"></div>
   <div class="hero-content">
-    <span class="micro">DIVA · 300–500 TC · OEKO-TEX®</span>
+    <span class="micro">DIVA · 300 TC · Хлопок</span>
     <h1>
       <span class="line"><span class="line-inner">Искусство</span></span>
       <span class="line"><span class="line-inner"><em>тишины</em></span></span>
@@ -150,73 +134,39 @@
   <div class="scroll-hint"></div>
 </section>
 
-<!-- COMPONENT: Marquee -->
-<div class="marquee"><div class="marquee-inner">
-  <span>Сатин 300 TC <i>✦</i> Сатин 500 TC <i>✦</i> Мытый хлопок <i>✦</i> Лён <i>✦</i> Бамбук <i>✦</i> OEKO-TEX® <i>✦</i>&nbsp;</span>
-  <span>Сатин 300 TC <i>✦</i> Сатин 500 TC <i>✦</i> Мытый хлопок <i>✦</i> Лён <i>✦</i> Бамбук <i>✦</i> OEKO-TEX® <i>✦</i>&nbsp;</span>
-</div></div>
-
 <!-- COMPONENT: Statement -->
 <section class="statement">
   <div class="wrap">
     <div class="big">
       <span class="line"><span class="line-inner">300 нитей на дюйм².</span></span>
-      <span class="line"><span class="line-inner"><em>Хлопок. Лён. Бамбук.</em></span></span>
+      <span class="line"><span class="line-inner"><em>Хлопок.</em></span></span>
       <span class="line"><span class="line-inner">Ничего лишнего.</span></span>
     </div>
   </div>
 </section>
 
-<!-- COMPONENT: Fabric Experience -->
-<section id="fabric">
-  <div class="fab-head">
-    <h2 data-reveal>Почувствуйте <em>ткань</em></h2>
-    <div class="fab-tabs" data-reveal>
-      <button class="fab-btn active" data-fab="300">Сатин 300</button>
-      <button class="fab-btn" data-fab="500">Сатин 500</button>
-      <button class="fab-btn" data-fab="washed">Мытый хлопок</button>
-      <button class="fab-btn" data-fab="linen">Лён</button>
-      <button class="fab-btn" data-fab="bamboo">Бамбук</button>
-    </div>
-  </div>
-  <div class="fab-viewer fab-300" id="fabViewer">
-    <div class="sheen"></div>
-    <div class="lens"></div>
-  </div>
-  <div class="fab-info">
-    <div>
-      <div id="fabName">Сатин 300 TC</div>
-      <div id="fabDesc">Шелковистый блеск и плотность, которая обнимает.</div>
-    </div>
-    <div id="fabFeel">гладкий · блестящий</div>
-  </div>
+<!-- COMPONENT: Parallax photo -->
+<section class="ph-wrap">
+  <div class="ph" data-parallax role="img" aria-label="Текстура сатиновой ткани"></div>
+  <div class="ph-caption micro">Сатин. Глубина чёрного.</div>
 </section>
 
-<!-- COMPONENT: Film -->
-<section class="film">
-  <!-- Положите файл video.mp4 рядом с index.html в репозитории — и он заиграет -->
-  <video id="filmVideo" muted loop playsinline preload="metadata"><source src="video.mp4" type="video/mp4"></video>
-  <div class="film-fallback" id="filmFallback" data-parallax></div>
-  <div class="film-caption micro">DIVA — film · нажмите, чтобы остановить</div>
-</section>
-
-<!-- COMPONENT: Craft -->
-<section class="craft" id="craft">
-  <div class="wrap">
-    <div class="craft-grid">
-      <div class="craft-item" data-reveal><span class="n">01</span><h3>Плотное плетение</h3><p>300–500 нитей на дюйм². Ткань, которая переживёт сотни стирок и станет только мягче.</p></div>
-      <div class="craft-item" data-reveal><span class="n">02</span><h3>Скрытая молния</h3><p>Пододеяльник застёгивается незаметно. Одеяло остаётся на месте — вы не замечаете ничего.</p></div>
-      <div class="craft-item" data-reveal><span class="n">03</span><h3>Кант и кромка</h3><p>Тонкая окантовка по краю — деталь, которую видно даже в темноте.</p></div>
-      <div class="craft-item" data-reveal><span class="n">04</span><h3>Чистые швы</h3><p>Ни одной свободной нити. Внутри — так же красиво, как снаружи.</p></div>
+<!-- COMPONENT: Story -->
+<section class="story">
+  <div class="wrap story-grid">
+    <div class="story-media" data-reveal role="img" aria-label="Плетение хлопковой нити крупным планом"></div>
+    <div class="story-text">
+      <span class="micro" data-reveal>Материал</span>
+      <p class="story-copy" data-reveal>Длинноволокнистый хлопок и плотное сатиновое плетение — ткань держит цвет и форму спустя сотни стирок. Одна фабрика, один стандарт: за качество каждого шва отвечаем мы, а не десять посредников.</p>
     </div>
   </div>
 </section>
 
 <!-- COMPONENT: Facts -->
 <section class="facts">
-  <div class="fact" data-reveal><b>300<i>–</i>500</b><span class="micro">Плотность TC</span></div>
-  <div class="fact" data-reveal><b>100<i>%</i></b><span class="micro">Натуральные волокна</span></div>
-  <div class="fact" data-reveal><b>OEKO<i>-</i>TEX®</b><span class="micro">Сертификат безопасности</span></div>
+  <div class="fact" data-reveal><b>300<i>TC</i></b><span class="micro">Плотность</span></div>
+  <div class="fact" data-reveal><b>100<i>%</i></b><span class="micro">Хлопок</span></div>
+  <div class="fact" data-reveal><b>6</b><span class="micro">Оттенков</span></div>
 </section>
 
 <!-- COMPONENT: CTA -->
@@ -237,36 +187,39 @@
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* Lenis */
-if(window.Lenis){
-  window._lenis = new Lenis({ lerp:.09, smoothWheel:true });
-  _lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(t => _lenis.raf(t*1000));
+/* ---------- Reduced motion: скорость анимаций почти до нуля ---------- */
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+  gsap.globalTimeline.timeScale(50);
+}
+
+/* ---------- Lenis smooth scroll + синхронизация с GSAP ---------- */
+if(window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const lenis = new Lenis({ lerp:.09, smoothWheel:true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t*1000));
   gsap.ticker.lagSmoothing(0);
 }
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
-  const t = document.querySelector(a.getAttribute('href'));
-  if(t && window._lenis){ e.preventDefault(); _lenis.scrollTo(t,{ offset:0 }); }
-}));
 
-/* Loader + hero */
+/* ---------- Loader + hero reveal ---------- */
 window.addEventListener('load', () => {
   const tl = gsap.timeline({ defaults:{ ease:'power4.out' } });
   tl.to('#loader', { autoAlpha:0, duration:.9, delay:.7, ease:'power2.inOut' })
     .from('.hero .line-inner', { yPercent:115, duration:1.4, stagger:.14 }, '-=.25')
     .from('.hero .micro', { autoAlpha:0, y:24, duration:1 }, '-=.9')
     .from('.scroll-hint', { autoAlpha:0, duration:1 }, '-=.7');
+
+  /* Ken Burns: медленное дыхание фото */
   gsap.fromTo('#heroBg', { scale:1.15 }, { scale:1.02, duration:3.2, ease:'power2.out', delay:.8 });
   gsap.to('#heroBg', { scale:1.1, duration:16, ease:'sine.inOut', yoyo:true, repeat:-1, delay:4 });
 });
 
-/* Statement */
+/* ---------- Statement: построчный reveal при скролле ---------- */
 gsap.from('.statement .line-inner', {
   yPercent:115, duration:1.3, stagger:.16, ease:'power4.out',
   scrollTrigger:{ trigger:'.statement', start:'top 72%' }
 });
 
-/* Parallax */
+/* ---------- Parallax фото ---------- */
 gsap.utils.toArray('[data-parallax]').forEach(el => {
   gsap.fromTo(el, { yPercent:-10 }, {
     yPercent:10, ease:'none',
@@ -274,68 +227,15 @@ gsap.utils.toArray('[data-parallax]').forEach(el => {
   });
 });
 
-/* Reveal */
+/* ---------- Fade-reveal для мелких элементов ---------- */
 gsap.utils.toArray('[data-reveal]').forEach(el => {
-  gsap.from(el, { y:44, autoAlpha:0, duration:1.2, ease:'power3.out',
-    scrollTrigger:{ trigger:el, start:'top 88%' } });
+  gsap.from(el, {
+    y:44, autoAlpha:0, duration:1.2, ease:'power3.out',
+    scrollTrigger:{ trigger:el, start:'top 88%' }
+  });
 });
 
-/* ---------- FABRIC EXPERIENCE ---------- */
-const FABRICS = {
-  '300':   { name:'Сатин 300 TC',   desc:'Шелковистый блеск и плотность, которая обнимает.', feel:'гладкий · блестящий' },
-  '500':   { name:'Сатин 500 TC',   desc:'Плотнее, тяжелее, глубже блеск. Для тех, кто спит серьёзно.', feel:'плотный · атласный' },
-  'washed':{ name:'Мытый хлопок',   desc:'Матовая текстура и мягкость с первого прикосновения.', feel:'матовый · мягкий' },
-  'linen': { name:'Лён',            desc:'Дышит, живёт и становится лучше с каждой стиркой.', feel:'фактурный · прохладный' },
-  'bamboo':{ name:'Бамбук',         desc:'Прохлада шёлка и природная гипоаллергенность.', feel:'прохладный · шелковый' },
-};
-const viewer = document.getElementById('fabViewer');
-const lens = viewer.querySelector('.lens');
-let lastRip = 0, lastVib = 0;
-
-document.querySelectorAll('.fab-btn').forEach(btn => btn.addEventListener('click', () => {
-  document.querySelectorAll('.fab-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  const key = btn.dataset.fab, f = FABRICS[key];
-  viewer.className = 'fab-viewer fab-' + key;
-  gsap.fromTo(['#fabName','#fabDesc','#fabFeel'], {autoAlpha:0, y:14}, {autoAlpha:1, y:0, duration:.7, stagger:.08, ease:'power2.out',
-    onStart(){ document.getElementById('fabName').textContent = f.name;
-               document.getElementById('fabDesc').textContent = f.desc;
-               document.getElementById('fabFeel').textContent = f.feel; }});
-}));
-
-viewer.addEventListener('pointermove', e => {
-  const r = viewer.getBoundingClientRect();
-  const x = e.clientX-r.left, y = e.clientY-r.top;
-  viewer.style.setProperty('--mx', x+'px');
-  viewer.style.setProperty('--my', y+'px');
-  lens.style.opacity = 1; lens.style.left = x+'px'; lens.style.top = y+'px';
-  const t = Date.now();
-  if(t-lastRip > 130){
-    const s = document.createElement('span');
-    s.className = 'ripple'; s.style.left = x+'px'; s.style.top = y+'px';
-    viewer.appendChild(s); setTimeout(()=>s.remove(), 750); lastRip = t;
-  }
-  if(e.pointerType==='touch' && navigator.vibrate && t-lastVib > 90){ navigator.vibrate(4); lastVib = t; }
-});
-viewer.addEventListener('pointerleave', ()=> lens.style.opacity = 0);
-
-/* ---------- FILM ---------- */
-const video = document.getElementById('filmVideo');
-const fallback = document.getElementById('filmFallback');
-video.addEventListener('error', ()=> video.style.display='none', true);
-video.querySelector('source').addEventListener('error', ()=>{ video.style.display='none'; fallback.style.display='block'; });
-video.addEventListener('loadeddata', ()=> fallback.style.display='none');
-fallback.style.display = 'block';
-ScrollTrigger.create({
-  trigger:'.film', start:'top bottom', end:'bottom top',
-  onEnter:()=> video.play().catch(()=>{}),
-  onLeave:()=> video.pause(),
-  onEnterBack:()=> video.play().catch(()=>{}),
-  onLeaveBack:()=> video.pause()
-});
-video.addEventListener('click', ()=> video.paused ? video.play() : video.pause());
-
-/* Cursor */
+/* ---------- Кастомный курсор (только десктоп) ---------- */
 if(matchMedia('(pointer:fine)').matches){
   const cx = gsap.quickTo('#cursor','x',{ duration:.55, ease:'power3' });
   const cy = gsap.quickTo('#cursor','y',{ duration:.55, ease:'power3' });
