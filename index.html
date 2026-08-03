@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SATINE — премиальное постельное бельё 300 TC</title>
+<title>DIVA — премиальное постельное бельё 300 TC</title>
 <meta name="description" content="Премиальное постельное бельё из сатина 300 TC. 100% длинноволокнистый хлопок. Доставка по всей России.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -129,7 +129,7 @@
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="#">SATI<span>N</span>E</a>
+    <a class="logo" href="#">DI<span>V</span>A</a>
     <ul class="nav-links">
       <li><a href="#catalog">Коллекция</a></li>
       <li><a href="#about">О ткани</a></li>
@@ -200,7 +200,7 @@
 </section>
 
 <footer>
-  <div class="wrap">© 2026 SATINE · Премиальное постельное бельё 300 TC · Сделано с любовью к сну</div>
+  <div class="wrap">© 2026 DIVA · Премиальное постельное бельё 300 TC · Сделано с любовью к сну</div>
 </footer>
 
 <div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
@@ -220,10 +220,10 @@
 <div class="toast" id="toast">Добавлено в корзину ✓</div>
 
 <script>
-/* ====== НАСТРОЙТЕ ПОД СЕБЯ ====== */
-const PHONE = '79000000000';      // ← ваш номер WhatsApp, формат 7XXXXXXXXXX
-const TELEGRAM = 'your_username'; // ← ваш Telegram без @
-/* ================================= */
+/* ====== ВАШИ КОНТАКТЫ ====== */
+const PHONE = '79236316136';  // WhatsApp
+const TELEGRAM = 'Stykket';   // Telegram
+/* =========================== */
 
 const SIZES = [
   { name:'1,5-спальный', price:8900 },
@@ -331,7 +331,7 @@ function toggleCart(open){
 
 function checkout(){
   if(!cart.length){ showToast('Корзина пуста'); return; }
-  const lines = ['Здравствуйте! Хочу заказать постельное бельё SATINE:'];
+  const lines = ['Здравствуйте! Хочу заказать постельное бельё DIVA:'];
   cart.forEach((i,n)=>{
     const p = PRODUCTS.find(x=>x.id===i.id);
     lines.push(`${n+1}. «${p.name}», размер ${i.size}, ${i.qty} шт. — ${fmt(i.price*i.qty)}`);
@@ -351,7 +351,7 @@ function showToast(msg='Добавлено в корзину ✓'){
 document.getElementById('waLink').href = `https://wa.me/${PHONE}`;
 document.getElementById('tgLink').href = `https://t.me/${TELEGRAM}`;
 document.getElementById('phoneLink').href = `tel:+${PHONE}`;
-document.getElementById('phoneLink').textContent = '+' + PHONE;
+document.getElementById('phoneLink').textContent = '+7 923 631-61-36';
 
 updateCart();
 </script>
