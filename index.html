@@ -3,465 +3,551 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIVA — премиальное постельное бельё 300 TC</title>
-<meta name="description" content="Премиальное постельное бельё из сатина 300 TC. 100% длинноволокнистый хлопок. Доставка по всей России.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>DIVA — премиальное постельное бельё</title>
+<meta name="description" content="DIVA — премиальное постельное бельё из длинноволокнистого хлопка. Сатин 300 TC и 500 TC. Предзаказ и доставка по России.">
+<meta name="theme-color" content="#17110f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#faf7f1; --ink:#26211b; --soft:#6f6659;
-    --gold:#a8865a; --gold-dark:#8d6f47;
-    --card:#ffffff; --line:#e9e1d4;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-  h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
-  section{padding:80px 0}
-  .section-title{font-size:clamp(28px,4vw,40px);text-align:center;margin-bottom:12px}
-  .section-sub{text-align:center;color:var(--soft);max-width:560px;margin:0 auto 48px}
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
-  .reveal.visible{opacity:1;transform:none}
+:root{
+  --bg:#f6f1ea;
+  --paper:#fffdf9;
+  --ink:#1b1715;
+  --muted:#766b63;
+  --wine:#4c171e;
+  --wine-2:#6d2730;
+  --bronze:#b28a5c;
+  --bronze-2:#8c6945;
+  --line:rgba(40,29,24,.12);
+  --shadow:0 28px 80px rgba(35,22,18,.14);
+  --radius:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;overflow-x:hidden}
+body.lock{overflow:hidden}
+a{color:inherit}
+button,input,select{font:inherit}
+img{max-width:100%;display:block}
+.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
+section{padding:104px 0}
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze-2);font-weight:700}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,76px);line-height:.98;font-weight:600;letter-spacing:-.03em}
+.section-sub{color:var(--muted);max-width:620px;font-size:16px}
+.reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:none}
 
-  /* Шапка */
-  header{position:sticky;top:0;z-index:50;background:rgba(23,19,16,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .logo{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:4px;text-decoration:none;color:#fff}
-  .logo span{color:var(--gold)}
-  .nav-links{display:flex;gap:28px;list-style:none}
-  .nav-links a{text-decoration:none;color:#cbbfae;font-size:14px;font-weight:500;transition:color .2s}
-  .nav-links a:hover{color:var(--gold)}
-  .cart-btn{position:relative;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:30px;padding:9px 20px;font-family:inherit;font-size:14px;cursor:pointer;transition:.2s}
-  .cart-btn:hover{background:#fff;color:var(--ink)}
-  .cart-count{position:absolute;top:-7px;right:-7px;background:var(--gold);color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 4px}
-  @media(max-width:760px){.nav-links{display:none}}
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(to bottom,rgba(22,15,13,.78),rgba(22,15,13,.18),transparent);transition:.3s}
+header.scrolled{background:rgba(22,15,13,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-family:'Cormorant Garamond',serif;text-decoration:none;color:white;font-size:29px;letter-spacing:.28em;font-weight:600}
+.logo i{font-style:normal;color:var(--bronze)}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;color:#e8ddd6;font-size:13px;transition:.2s}
+.nav-links a:hover{color:#fff}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.preorder-pill{padding:10px 16px;border:1px solid rgba(255,255,255,.26);border-radius:99px;color:#f4e9e1;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.cart-btn{position:relative;border:0;background:#f5ede5;color:#211714;border-radius:99px;padding:11px 20px;font-weight:700;cursor:pointer;transition:.25s}
+.cart-btn:hover{transform:translateY(-2px);background:#fff}
+.cart-count{position:absolute;right:-5px;top:-7px;background:var(--wine-2);color:#fff;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;font-size:10px}
+.menu-btn{display:none;background:transparent;border:0;color:white;font-size:25px;cursor:pointer}
 
-  /* Хиро с 3D */
-  .hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(1200px 600px at 70% 20%, #2a2119, #171310 70%)}
-  #silk{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
-  .hero-content{position:relative;z-index:2;padding:120px 0 90px}
-  .hero-eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:12px;color:var(--gold);font-weight:700;margin-bottom:18px}
-  .hero h1{font-size:clamp(34px,5vw,56px);line-height:1.15;margin-bottom:20px;color:#fff}
-  .hero p{color:#d8cbb8;font-size:17px;max-width:460px;margin-bottom:32px}
-  .touch-hint{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e8ddcb;border-radius:30px;padding:8px 18px;font-size:13px}
-  .btn{display:inline-block;padding:15px 34px;border-radius:40px;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:.25s}
-  .btn-primary{background:var(--gold);color:#fff}
-  .btn-primary:hover{background:var(--gold-dark)}
-  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);margin-left:12px}
-  .btn-ghost:hover{background:#fff;color:var(--ink)}
+/* hero */
+.hero{min-height:100svh;position:relative;display:flex;align-items:center;overflow:hidden;background:
+  radial-gradient(900px 600px at 75% 35%,rgba(116,47,54,.42),transparent 60%),
+  linear-gradient(130deg,#110c0b 0%,#251311 48%,#4b1b22 100%)}
+.hero::before{content:"";position:absolute;inset:-20%;background:conic-gradient(from 170deg at 70% 50%,transparent 0 22%,rgba(255,220,185,.12) 28%,transparent 36% 100%);filter:blur(18px);animation:glow 11s ease-in-out infinite alternate}
+@keyframes glow{to{transform:translate3d(-4%,3%,0) rotate(8deg)}}
+#silk{position:absolute;inset:0;width:100%;height:100%;opacity:.78}
+.hero-noise{position:absolute;inset:0;opacity:.11;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
+.hero-content{position:relative;z-index:3;padding:150px 0 90px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.65fr);gap:70px;align-items:end}
+.hero-copy{max-width:760px}
+.hero .eyebrow{color:#d8b48b;margin-bottom:22px}
+.hero h1{font-family:'Cormorant Garamond',serif;color:#fff;font-size:clamp(58px,8.5vw,118px);font-weight:500;line-height:.85;letter-spacing:-.055em;max-width:900px}
+.hero h1 em{display:block;font-style:italic;color:#d8b48b;font-weight:500}
+.hero-lead{margin-top:30px;color:#e3d7cf;font-size:18px;max-width:590px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{border:0;border-radius:99px;padding:16px 28px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:.3s}
+.btn-primary{background:#f5ede5;color:#211714;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btn-primary:hover{transform:translateY(-3px);background:#fff}
+.btn-secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:white;backdrop-filter:blur(10px)}
+.btn-secondary:hover{background:rgba(255,255,255,.16)}
+.hero-card{border:1px solid rgba(255,255,255,.16);background:rgba(31,18,16,.36);backdrop-filter:blur(18px);border-radius:26px;padding:26px;color:#fff;box-shadow:0 30px 80px rgba(0,0,0,.22)}
+.hero-card .small{color:#cbbab1;font-size:12px;text-transform:uppercase;letter-spacing:.16em}
+.hero-card .big{font-family:'Cormorant Garamond',serif;font-size:45px;line-height:1;margin:10px 0 8px}
+.hero-card p{font-size:13px;color:#dfd0c8}
+.hero-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.hero-fact{padding-top:16px;border-top:1px solid rgba(255,255,255,.13)}
+.hero-fact strong{display:block;font-size:14px}
+.hero-fact span{font-size:11px;color:#cbbab1}
 
-  /* Преимущества */
-  .features{background:#fff;border-block:1px solid var(--line);padding:60px 0}
-  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
-  .feat{text-align:center}
-  .feat .ico{font-size:30px;margin-bottom:12px}
-  .feat h3{font-size:18px;margin-bottom:6px}
-  .feat p{font-size:14px;color:var(--soft)}
+/* strip */
+.trust-strip{background:#17100e;color:#eaddd5;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-item{padding:24px 22px;border-right:1px solid rgba(255,255,255,.08)}
+.trust-item:last-child{border-right:0}
+.trust-item strong{display:block;font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600}
+.trust-item span{font-size:12px;color:#bfaea5}
 
-  /* Интерактивная ткань */
-  .fabric-zone{position:relative;height:360px;border-radius:24px;overflow:hidden;cursor:crosshair;touch-action:pan-y;
-    background:linear-gradient(135deg,#35594a,#204034 55%,#16281f);box-shadow:0 30px 60px rgba(22,40,31,.35)}
-  .fabric-zone::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 3px,transparent 3px 7px),repeating-linear-gradient(-45deg,rgba(0,0,0,.08) 0 3px,transparent 3px 7px)}
-  .fabric-zone .sheen{position:absolute;inset:0;pointer-events:none;background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.38),transparent 62%);mix-blend-mode:screen}
-  .fabric-zone .caption{position:absolute;left:24px;bottom:20px;z-index:3;color:#eaf4ee;font-size:14px;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);border-radius:14px;padding:10px 16px;pointer-events:none}
-  .lens{position:absolute;z-index:4;width:150px;height:150px;border-radius:50%;border:2px solid rgba(255,255,255,.85);box-shadow:0 10px 30px rgba(0,0,0,.4), inset 0 0 20px rgba(0,0,0,.35);pointer-events:none;opacity:0;transition:opacity .25s;transform:translate(-50%,-50%);
-    background:repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.3) 0 2px,transparent 2px 6px),linear-gradient(135deg,#2a4c3e,#1d3a2e)}
-  .ripple{position:absolute;z-index:2;border:2px solid rgba(255,255,255,.55);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:rip .7s ease-out forwards}
-  @keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0;width:170px;height:170px}}
-  .ripple{width:170px;height:170px}
+/* story */
+.story-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}
+.story-visual{min-height:650px;border-radius:var(--radius);position:relative;overflow:hidden;background:
+ radial-gradient(circle at 25% 20%,rgba(255,255,255,.7),transparent 23%),
+ linear-gradient(150deg,#efe4d8,#a78572 48%,#4b1b22 100%);box-shadow:var(--shadow)}
+.story-visual::before{content:"";position:absolute;left:-8%;right:-8%;bottom:-18%;height:72%;border-radius:50% 50% 0 0;background:linear-gradient(145deg,#fff8ef,#d8baa5 55%,#7e4d48);transform:rotate(-8deg);box-shadow:0 -25px 60px rgba(255,255,255,.24) inset}
+.story-visual::after{content:"DIVA";position:absolute;right:24px;bottom:18px;font-family:'Cormorant Garamond',serif;color:rgba(255,255,255,.88);font-size:54px;letter-spacing:.2em}
+.story-copy .section-title{margin:15px 0 26px}
+.story-copy p{color:var(--muted);margin-bottom:18px}
+.quote{font-family:'Cormorant Garamond',serif;font-size:31px;line-height:1.2;color:var(--wine);margin:30px 0;padding-left:24px;border-left:2px solid var(--bronze)}
 
-  /* Каталог */
-  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px;perspective:1200px}
-  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .25s;transform-style:preserve-3d;will-change:transform}
-  .card:hover{box-shadow:0 24px 50px rgba(38,33,27,.16)}
-  .card::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--cx,50%) var(--cy,0%),rgba(255,255,255,.28),transparent 55%);opacity:0;transition:opacity .3s}
-  .card:hover::after{opacity:1}
-  .swatch{height:220px;position:relative}
-  .swatch::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),repeating-linear-gradient(-45deg,rgba(0,0,0,.035) 0 2px,transparent 2px 5px)}
-  .swatch .tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(255,255,255,.9);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;font-weight:700;color:var(--ink)}
-  .card-body{padding:22px;display:flex;flex-direction:column;flex:1}
-  .card-body h3{font-size:21px;margin-bottom:4px}
-  .card-body .desc{font-size:13px;color:var(--soft);margin-bottom:16px}
-  .sizes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-  .size-pill{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 13px;font-size:12px;cursor:pointer;font-family:inherit;transition:.2s}
-  .size-pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .card-bottom{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .price{font-family:'Playfair Display',serif;font-size:22px;white-space:nowrap}
-  .add-btn{background:var(--gold);color:#fff;border:none;border-radius:30px;padding:12px 22px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s}
-  .add-btn:hover{background:var(--gold-dark)}
+/* touch */
+.touch-section{background:#17100e;color:white;overflow:hidden}
+.touch-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:40px}
+.touch-head .section-sub{color:#bdaea6}
+.fabric-zone{height:520px;border-radius:32px;overflow:hidden;position:relative;cursor:crosshair;background:linear-gradient(135deg,#5d1e26,#2c1115 58%,#140b0d);box-shadow:0 40px 100px rgba(0,0,0,.32)}
+.fabric-zone::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(43deg,rgba(255,255,255,.045) 0 2px,transparent 2px 6px),repeating-linear-gradient(-43deg,rgba(0,0,0,.12) 0 2px,transparent 2px 6px)}
+.fabric-zone::after{content:"";position:absolute;inset:-20%;background:radial-gradient(360px circle at var(--mx,70%) var(--my,40%),rgba(255,233,206,.38),transparent 66%);mix-blend-mode:screen}
+.fabric-caption{position:absolute;z-index:5;left:28px;bottom:24px;display:flex;align-items:center;gap:12px;background:rgba(13,8,8,.46);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:12px 18px;color:#f0e2d9;font-size:13px}
+.lens{position:absolute;z-index:4;width:170px;height:170px;border-radius:50%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.75);box-shadow:0 20px 40px rgba(0,0,0,.5),inset 0 0 28px rgba(0,0,0,.35);opacity:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.12) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.27) 0 2px,transparent 2px 6px),linear-gradient(135deg,#7b333b,#2b1115)}
+.ripple{position:absolute;width:170px;height:170px;border:1px solid rgba(255,255,255,.45);border-radius:50%;transform:translate(-50%,-50%) scale(.05);animation:rip .8s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(1.2);opacity:0}}
 
-  /* Как заказать */
-  .steps{background:#fff;border-block:1px solid var(--line)}
-  .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:32px}
-  .step{text-align:center;padding:0 10px}
-  .step .num{font-family:'Playfair Display',serif;font-size:40px;color:var(--gold);margin-bottom:8px}
-  .step h3{font-size:17px;margin-bottom:6px}
-  .step p{font-size:14px;color:var(--soft)}
+/* catalog */
+.catalog-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:44px}
+.tc-switch{display:inline-flex;background:#e9ded2;padding:5px;border-radius:99px;gap:4px}
+.tc-switch button{border:0;background:transparent;padding:10px 18px;border-radius:99px;cursor:pointer;color:#655a53;font-weight:700}
+.tc-switch button.active{background:#fff;color:#1c1714;box-shadow:0 8px 24px rgba(45,28,20,.1)}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:0 18px 55px rgba(39,26,19,.06);transition:.35s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.swatch{height:330px;position:relative;overflow:hidden}
+.swatch::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.7),transparent 23%),linear-gradient(135deg,var(--c1),var(--c2));transform:rotate(-4deg) scale(1.08)}
+.swatch::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.4) 45%,transparent 65%);transform:translateX(-100%);transition:.7s}
+.card:hover .swatch::after{transform:translateX(100%)}
+.tag{position:absolute;left:18px;top:18px;background:rgba(255,255,255,.87);backdrop-filter:blur(10px);padding:7px 12px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.card-body{padding:24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.card-title-row{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.card h3{font-family:'Cormorant Garamond',serif;font-size:33px;line-height:1;font-weight:600}
+.card .desc{font-size:13px;color:var(--muted)}
+.price{font-family:'Cormorant Garamond',serif;font-size:27px;white-space:nowrap}
+.product-meta{display:flex;gap:8px;flex-wrap:wrap}
+.meta-chip{font-size:11px;border:1px solid var(--line);border-radius:99px;padding:6px 10px;color:#665b54}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size-pill{background:transparent;border:1px solid var(--line);border-radius:99px;padding:8px 12px;font-size:11px;cursor:pointer;transition:.2s}
+.size-pill:hover,.size-pill.active{background:var(--ink);color:white;border-color:var(--ink)}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;padding-top:4px}
+.add-btn{background:var(--wine);color:white;border:0;border-radius:99px;padding:13px 19px;font-weight:700;cursor:pointer;transition:.25s}
+.add-btn:hover{background:var(--wine-2);transform:translateY(-2px)}
 
-  /* Контакты */
-  .contacts{text-align:center}
-  .contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:28px}
-  .contact-links a{text-decoration:none;color:var(--ink);border:1px solid var(--line);background:#fff;border-radius:30px;padding:13px 26px;font-weight:600;font-size:14px;transition:.2s}
-  .contact-links a:hover{border-color:var(--gold);color:var(--gold)}
+/* desire section */
+.desire{padding:0 0 104px}
+.desire-box{min-height:560px;border-radius:34px;overflow:hidden;position:relative;display:flex;align-items:flex-end;background:
+ radial-gradient(circle at 75% 30%,rgba(255,255,255,.22),transparent 20%),
+ linear-gradient(130deg,#20100f,#6b2a32 53%,#c59672);box-shadow:var(--shadow)}
+.desire-box::before{content:"";position:absolute;width:76%;height:70%;right:-7%;top:10%;border-radius:48% 52% 0 0;background:linear-gradient(150deg,#f0ddcc,#b97f72 55%,#5a2229);transform:rotate(8deg);filter:drop-shadow(-30px 40px 45px rgba(0,0,0,.25))}
+.desire-copy{position:relative;z-index:2;color:white;padding:56px;max-width:650px}
+.desire-copy .section-title{font-size:clamp(46px,7vw,84px)}
+.desire-copy p{color:#eaded6;margin:20px 0 28px;max-width:500px}
 
-  footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;font-size:13px;color:var(--soft)}
+/* steps */
+.steps{background:var(--paper);border-block:1px solid var(--line)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:45px}
+.step{padding:32px;border:1px solid var(--line);border-radius:24px;background:#fff}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:62px;color:var(--bronze);line-height:1}
+.step h3{font-family:'Cormorant Garamond',serif;font-size:28px;margin:12px 0 8px}
+.step p{font-size:14px;color:var(--muted)}
 
-  /* Корзина */
-  .overlay{position:fixed;inset:0;background:rgba(38,33,27,.4);opacity:0;pointer-events:none;transition:.3s;z-index:90}
-  .overlay.show{opacity:1;pointer-events:auto}
-  .cart{position:fixed;top:0;right:-440px;width:420px;max-width:100%;height:100%;background:#fff;z-index:100;transition:right .35s;display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.12)}
-  .cart.open{right:0}
-  .cart-head{display:flex;justify-content:space-between;align-items:center;padding:22px;border-bottom:1px solid var(--line)}
-  .cart-head h3{font-size:22px}
-  .cart-close{background:none;border:none;font-size:26px;cursor:pointer;color:var(--soft)}
-  .cart-items{flex:1;overflow-y:auto;padding:20px 22px}
-  .cart-empty{text-align:center;color:var(--soft);padding:60px 20px}
-  .cart-item{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
-  .ci-name{font-weight:600;font-size:14px}
-  .ci-size{font-size:12px;color:var(--soft)}
-  .ci-controls{display:flex;align-items:center;gap:10px;margin-top:8px}
-  .qty-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:15px;line-height:1}
-  .ci-remove{background:none;border:none;color:#c0392b;font-size:12px;cursor:pointer;text-decoration:underline}
-  .ci-price{font-weight:700;white-space:nowrap}
-  .cart-foot{padding:22px;border-top:1px solid var(--line)}
-  .cart-total{display:flex;justify-content:space-between;font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px}
-  .wa-btn{display:block;width:100%;background:#23a455;color:#fff;text-align:center;border:none;border-radius:34px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
-  .wa-btn:hover{background:#1c8a47}
-  .cart-note{font-size:12px;color:var(--soft);text-align:center;margin-top:10px}
+/* lead */
+.lead{background:#211313;color:white}
+.lead-grid{display:grid;grid-template-columns:1fr .85fr;gap:60px;align-items:center}
+.lead .section-sub{color:#c9b9af;margin:22px 0 30px}
+.lead-form{background:#fff7f0;color:var(--ink);border-radius:28px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.24)}
+.lead-form label{display:block;font-size:12px;color:var(--muted);margin:12px 0 7px}
+.lead-form input,.lead-form select{width:100%;border:1px solid #dfd2c6;background:white;border-radius:14px;padding:14px 15px;outline:none}
+.lead-form input:focus,.lead-form select:focus{border-color:var(--bronze)}
+.lead-form .btn{width:100%;margin-top:18px;background:var(--wine);color:white}
+.form-note{font-size:11px;color:#85786f;margin-top:10px;text-align:center}
 
-  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:13px 28px;border-radius:30px;font-size:14px;opacity:0;transition:.35s;z-index:120;pointer-events:none}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{background:#120c0b;color:#c7b7af;padding:34px 0;font-size:12px}
+.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.footer-logo{font-family:'Cormorant Garamond',serif;color:white;font-size:25px;letter-spacing:.22em}
+
+/* cart */
+.overlay{position:fixed;inset:0;background:rgba(15,9,8,.62);backdrop-filter:blur(5px);opacity:0;pointer-events:none;transition:.3s;z-index:90}
+.overlay.show{opacity:1;pointer-events:auto}
+.cart{position:fixed;top:0;right:-460px;height:100%;width:min(440px,100%);background:#fffaf5;z-index:100;transition:.35s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 70px rgba(0,0,0,.22)}
+.cart.open{right:0}
+.cart-head{display:flex;align-items:center;justify-content:space-between;padding:24px;border-bottom:1px solid var(--line)}
+.cart-head h3{font-family:'Cormorant Garamond',serif;font-size:32px}
+.cart-close{border:0;background:transparent;font-size:28px;cursor:pointer}
+.cart-items{flex:1;overflow:auto;padding:20px 24px}
+.cart-empty{text-align:center;color:var(--muted);padding:80px 20px}
+.cart-item{display:flex;justify-content:space-between;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.ci-name{font-weight:700}
+.ci-size{font-size:12px;color:var(--muted);margin-top:3px}
+.ci-controls{display:flex;align-items:center;gap:9px;margin-top:10px}
+.qty-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:white;cursor:pointer}
+.ci-remove{border:0;background:transparent;color:#9c2f3d;text-decoration:underline;font-size:11px;cursor:pointer}
+.ci-price{font-weight:700;white-space:nowrap}
+.cart-foot{padding:22px 24px;border-top:1px solid var(--line)}
+.cart-total{display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:14px}
+.wa-btn{width:100%;border:0;border-radius:99px;background:#1d9b54;color:white;padding:16px;font-weight:700;cursor:pointer}
+.cart-note{text-align:center;font-size:11px;color:var(--muted);margin-top:9px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);opacity:0;background:#1b1512;color:white;padding:13px 22px;border-radius:99px;z-index:120;transition:.35s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:980px){
+  .hero-content{grid-template-columns:1fr;gap:40px;align-items:start}
+  .hero-card{max-width:480px}
+  .story-grid,.lead-grid{grid-template-columns:1fr}
+  .story-visual{min-height:520px}
+  .catalog-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-item:nth-child(2){border-right:0}
+  .trust-item:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.08)}
+}
+@media(max-width:760px){
+  section{padding:78px 0}
+  .nav-links,.preorder-pill{display:none}
+  .menu-btn{display:block}
+  .hero{min-height:auto}
+  .hero-content{padding:130px 0 70px}
+  .hero h1{font-size:clamp(55px,18vw,88px)}
+  .hero-facts{grid-template-columns:1fr}
+  .hero-fact{display:flex;justify-content:space-between;gap:12px}
+  .catalog-head,.touch-head{align-items:start;flex-direction:column}
+  .catalog-grid,.steps-grid{grid-template-columns:1fr}
+  .swatch{height:290px}
+  .fabric-zone{height:390px}
+  .desire-copy{padding:34px}
+  .desire-box{min-height:520px}
+  .footer-row{flex-direction:column;align-items:start}
+}
+@media(max-width:520px){
+  .wrap{width:min(100% - 24px,1180px)}
+  .nav{height:68px}
+  .logo{font-size:24px}
+  .cart-btn{padding:9px 15px;font-size:12px}
+  .hero-buttons .btn{width:100%}
+  .hero-card{padding:22px}
+  .trust-grid{grid-template-columns:1fr}
+  .trust-item{border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .trust-item:last-child{border-bottom:0}
+  .section-title{font-size:45px}
+  .story-visual{min-height:420px}
+  .desire-box::before{width:110%;right:-30%}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
-<header>
+<header id="header">
   <div class="wrap nav">
-    <a class="logo" href="#">DI<span>V</span>A</a>
+    <a class="logo" href="#top">DI<i>V</i>A</a>
     <ul class="nav-links">
+      <li><a href="#story">О бренде</a></li>
       <li><a href="#touch">Ткань</a></li>
       <li><a href="#catalog">Коллекция</a></li>
-      <li><a href="#how">Как заказать</a></li>
-      <li><a href="#contacts">Контакты</a></li>
+      <li><a href="#order">Предзаказ</a></li>
     </ul>
-    <button class="cart-btn" onclick="toggleCart(true)">Корзина <span class="cart-count" id="cartCount">0</span></button>
+    <div class="nav-actions">
+      <span class="preorder-pill">Первая коллекция · ограниченный выпуск</span>
+      <button class="cart-btn" onclick="toggleCart(true)">Корзина <span class="cart-count" id="cartCount">0</span></button>
+      <button class="menu-btn" aria-label="Меню">☰</button>
+    </div>
   </div>
 </header>
 
+<main id="top">
 <section class="hero">
   <canvas id="silk"></canvas>
+  <div class="hero-noise"></div>
   <div class="wrap hero-content">
-    <div class="touch-hint">👆 Проведите по ткани — она отвечает на прикосновение</div>
-    <div class="hero-eyebrow">Премиальный сатин · 300 TC</div>
-    <h1>Сон, к которому хочется возвращаться</h1>
-    <p>Постельное бельё из длинноволокнистого хлопка плотностью 300 нитей на дюйм². Шелковистое, дышащее, долговечное.</p>
-    <a href="#catalog" class="btn btn-primary">Смотреть коллекцию</a>
-    <a href="#touch" class="btn btn-ghost">Потрогать ткань</a>
+    <div class="hero-copy">
+      <div class="eyebrow">DIVA · private collection</div>
+      <h1>Постельное бельё, которое <em>хочется чувствовать</em></h1>
+      <p class="hero-lead">Мягкий сатиновый блеск, длинноволокнистый хлопок и благородные оттенки. DIVA превращает спальню в личное пространство роскоши — без показного блеска.</p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="#catalog">Выбрать комплект</a>
+        <a class="btn btn-secondary" href="#touch">Почувствовать ткань</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <div class="small">Предзаказ первой коллекции</div>
+      <div class="big">300 / 500 TC</div>
+      <p>Выберите баланс мягкости, плотности и прохладного сатинового ощущения.</p>
+      <div class="hero-facts">
+        <div class="hero-fact"><strong>100%</strong><span>хлопок</span></div>
+        <div class="hero-fact"><strong>3 размера</strong><span>матрасов</span></div>
+        <div class="hero-fact"><strong>Россия</strong><span>доставка</span></div>
+      </div>
+    </aside>
   </div>
 </section>
 
-<section class="features reveal" id="about">
-  <div class="wrap feat-grid">
-    <div class="feat"><div class="ico">🌿</div><h3>100% хлопок</h3><p>Длинноволокнистый египетский хлопок без синтетики</p></div>
-    <div class="feat"><div class="ico">✨</div><h3>300 TC</h3><p>Высокая плотность: ткань гладкая и при этом дышащая</p></div>
-    <div class="feat"><div class="ico">🤍</div><h3>Аккуратные детали</h3><p>Скрытая молния, клапаны, усиленные швы</p></div>
-    <div class="feat"><div class="ico">🎁</div><h3>Подарочная упаковка</h3><p>Каждый комплект — в фирменной коробке с лентой</p></div>
+<div class="trust-strip">
+  <div class="wrap trust-grid">
+    <div class="trust-item"><strong>Long-staple</strong><span>длинноволокнистый хлопок</span></div>
+    <div class="trust-item"><strong>300 / 500 TC</strong><span>две премиальные плотности</span></div>
+    <div class="trust-item"><strong>Скрытые детали</strong><span>молния, клапан, аккуратные швы</span></div>
+    <div class="trust-item"><strong>Предзаказ</strong><span>ограниченный первый выпуск</span></div>
+  </div>
+</div>
+
+<section id="story">
+  <div class="wrap story-grid">
+    <div class="story-visual reveal" aria-label="Абстрактная визуализация сатиновой ткани"></div>
+    <div class="story-copy reveal">
+      <div class="eyebrow">Не просто бельё</div>
+      <h2 class="section-title">Красота, которая начинается после полуночи</h2>
+      <p>DIVA создана для спальни, в которую хочется возвращаться. Для прохладной гладкости ткани на коже, мягкого света и ощущения, что весь внешний шум остался за дверью.</p>
+      <p>Мы начинаем с небольшой коллекции и отбираем ткань по реальным образцам, а не только по цифрам в каталоге поставщика.</p>
+      <div class="quote">«Тихая роскошь — это когда качество не нужно объяснять. Его чувствуют.»</div>
+    </div>
   </div>
 </section>
 
-<section id="touch">
+<section class="touch-section" id="touch">
   <div class="wrap">
-    <h2 class="section-title reveal">Почувствуйте ткань через экран</h2>
-    <p class="section-sub reveal">Проведите курсором или пальцем: сатин отвечает бликом и рябью. На телефоне вы ощутите лёгкую вибрацию — так DIVA передаёт прикосновение. Наведите лупу, чтобы рассмотреть переплетение нитей.</p>
+    <div class="touch-head reveal">
+      <div>
+        <div class="eyebrow">Тактильный опыт</div>
+        <h2 class="section-title">Сатин отвечает на прикосновение</h2>
+      </div>
+      <p class="section-sub">Проведите курсором или пальцем по ткани. Блик меняется, как на настоящем сатине. Это визуальная метафора того самого прохладного, гладкого ощущения DIVA.</p>
+    </div>
     <div class="fabric-zone reveal" id="fabricZone">
-      <div class="sheen"></div>
       <div class="lens"></div>
-      <div class="caption">🔍 Изумрудный сатин · ведите пальцем — ткань оживает</div>
+      <div class="fabric-caption">Проведите по ткани · сравните блеск и глубину оттенка</div>
     </div>
   </div>
 </section>
 
 <section id="catalog">
   <div class="wrap">
-    <h2 class="section-title reveal">Коллекция</h2>
-    <p class="section-sub reveal">Шесть благородных оттенков. Выберите размер — и комплект отправится в корзину.</p>
+    <div class="catalog-head reveal">
+      <div>
+        <div class="eyebrow">Первая коллекция</div>
+        <h2 class="section-title">Оттенки желания</h2>
+        <p class="section-sub" style="margin-top:18px">Спокойная палитра, которая выглядит дорого в любом интерьере. Выберите плотность ткани и размер.</p>
+      </div>
+      <div class="tc-switch" aria-label="Выбор плотности ткани">
+        <button class="active" data-tc="300" onclick="setTC(300,this)">300 TC</button>
+        <button data-tc="500" onclick="setTC(500,this)">500 TC</button>
+      </div>
+    </div>
     <div class="catalog-grid" id="catalogGrid"></div>
   </div>
 </section>
 
-<section class="steps" id="how">
+<section class="desire">
   <div class="wrap">
-    <h2 class="section-title reveal">Как заказать</h2>
-    <p class="section-sub reveal">Всё просто — три шага до идеального сна</p>
-    <div class="steps-grid">
-      <div class="step reveal"><div class="num">1</div><h3>Выберите комплект</h3><p>Цвет и размер — в карточках товара выше</p></div>
-      <div class="step reveal"><div class="num">2</div><h3>Добавьте в корзину</h3><p>Нажмите «В корзину» — заказ соберётся автоматически</p></div>
-      <div class="step reveal"><div class="num">3</div><h3>Оформите в WhatsApp</h3><p>Мы подтвердим заказ, оплату и доставку по всей России</p></div>
+    <div class="desire-box reveal">
+      <div class="desire-copy">
+        <div class="eyebrow" style="color:#e2b98e">Ваш вечер. Ваш ритуал.</div>
+        <h2 class="section-title">Спальня, в которой всё начинается заново</h2>
+        <p>Мягкий свет, чистая кожа, прохладный сатин. DIVA создаёт не интерьер — она создаёт состояние.</p>
+        <a class="btn btn-primary" href="#order">Оставить предзаказ</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="contacts reveal" id="contacts">
+<section class="steps">
   <div class="wrap">
-    <h2 class="section-title">Остались вопросы?</h2>
-    <p class="section-sub">Напишите нам — поможем подобрать размер и цвет</p>
-    <div class="contact-links">
-      <a id="waLink" href="#" target="_blank">WhatsApp</a>
-      <a id="tgLink" href="#" target="_blank">Telegram</a>
-      <a id="phoneLink" href="#">Позвонить</a>
+    <div class="eyebrow reveal">Как это работает</div>
+    <h2 class="section-title reveal" style="margin-top:14px">Три шага до DIVA</h2>
+    <div class="steps-grid">
+      <div class="step reveal"><div class="step-num">01</div><h3>Выберите ткань</h3><p>300 TC — легче и воздушнее. 500 TC — плотнее, весомее и более гладко ощущается на коже.</p></div>
+      <div class="step reveal"><div class="step-num">02</div><h3>Соберите комплект</h3><p>Выберите оттенок и размер матраса. Состав комплекта уже продуман для ежедневного использования.</p></div>
+      <div class="step reveal"><div class="step-num">03</div><h3>Подтвердите предзаказ</h3><p>Мы свяжемся с вами, подтвердим сроки, оплату и доставку по России.</p></div>
     </div>
   </div>
 </section>
+
+<section class="lead" id="order">
+  <div class="wrap lead-grid">
+    <div class="reveal">
+      <div class="eyebrow" style="color:#d7ae84">Первый выпуск</div>
+      <h2 class="section-title">Получите доступ к предзаказу раньше остальных</h2>
+      <p class="section-sub">Оставьте контакты. Мы сообщим о финальных оттенках, образцах ткани и дате начала первой поставки.</p>
+      <div class="product-meta">
+        <span class="meta-chip" style="color:#e6d5cc;border-color:rgba(255,255,255,.2)">Без спама</span>
+        <span class="meta-chip" style="color:#e6d5cc;border-color:rgba(255,255,255,.2)">Ограниченный выпуск</span>
+        <span class="meta-chip" style="color:#e6d5cc;border-color:rgba(255,255,255,.2)">Россия</span>
+      </div>
+    </div>
+    <form class="lead-form reveal" onsubmit="leadSubmit(event)">
+      <label for="name">Имя</label>
+      <input id="name" name="name" placeholder="Как к вам обращаться" required>
+      <label for="phone">Телефон или Telegram</label>
+      <input id="phone" name="phone" placeholder="+7 или @username" required>
+      <label for="interest">Что интересует</label>
+      <select id="interest" name="interest">
+        <option>Сравнить 300 TC и 500 TC</option>
+        <option>Белый комплект</option>
+        <option>Тёплые нейтральные оттенки</option>
+        <option>Тёмная коллекция</option>
+      </select>
+      <button class="btn" type="submit">Получить доступ к предзаказу</button>
+      <div class="form-note">Нажимая кнопку, вы соглашаетесь на связь по вашему запросу.</div>
+    </form>
+  </div>
+</section>
+</main>
 
 <footer>
-  <div class="wrap">© 2026 DIVA · Премиальное постельное бельё 300 TC · Сделано с любовью к сну</div>
+  <div class="wrap footer-row">
+    <div class="footer-logo">DIVA</div>
+    <div>© 2026 DIVA · Премиальное постельное бельё · Предзаказ</div>
+    <div><a id="tgLink" href="#" target="_blank">Telegram</a> · <a id="waLink" href="#" target="_blank">WhatsApp</a></div>
+  </div>
 </footer>
 
 <div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
 <aside class="cart" id="cartPanel">
-  <div class="cart-head">
-    <h3>Ваш заказ</h3>
-    <button class="cart-close" onclick="toggleCart(false)">×</button>
-  </div>
+  <div class="cart-head"><h3>Ваш предзаказ</h3><button class="cart-close" onclick="toggleCart(false)">×</button></div>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot">
     <div class="cart-total"><span>Итого:</span><span id="cartTotal">0 ₽</span></div>
-    <button class="wa-btn" onclick="checkout()">Оформить через WhatsApp</button>
-    <div class="cart-note">Откроется чат с готовым текстом заказа</div>
+    <button class="wa-btn" onclick="checkout()">Отправить заказ в WhatsApp</button>
+    <div class="cart-note">Откроется чат с уже собранным текстом заказа</div>
   </div>
 </aside>
-
-<div class="toast" id="toast">Добавлено в корзину ✓</div>
+<div class="toast" id="toast">Добавлено в корзину</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ====== ВАШИ КОНТАКТЫ ====== */
-const PHONE = '79236316136';
-const TELEGRAM = 'Stykket';
-/* =========================== */
+const PHONE='79236316136';
+const TELEGRAM='Stykket';
+let CURRENT_TC=300;
 
-const SIZES = [
-  { name:'1,5-спальный', price:8900 },
-  { name:'2-спальный',   price:10900 },
-  { name:'Евро',         price:12900 },
-  { name:'Семейный',     price:13900 },
-];
-const PRODUCTS = [
-  { id:1, name:'Белый жемчуг',    desc:'Классический тёплый белый',     color:'#efe9df' },
-  { id:2, name:'Слоновая кость',  desc:'Нежный кремово-золотистый',     color:'#e5d8bf' },
-  { id:3, name:'Пудровая роза',   desc:'Приглушённый розово-бежевый',   color:'#d9b8b4' },
-  { id:4, name:'Шалфей',          desc:'Мягкий серо-зелёный',           color:'#a9b49f' },
-  { id:5, name:'Графит',          desc:'Глубокий тёмно-серый',          color:'#4b4b4e' },
-  { id:6, name:'Изумрудная ночь', desc:'Насыщенный тёмно-зелёный',      color:'#2e4d3f' },
+const SIZES=[
+  {name:'140 × 200', label:'для матраса 140 × 200', add300:0, add500:0},
+  {name:'160 × 200', label:'для матраса 160 × 200', add300:2000, add500:2500},
+  {name:'180 × 200', label:'для матраса 180 × 200', add300:4000, add500:5000}
 ];
 
-const fmt = n => n.toLocaleString('ru-RU') + ' ₽';
-const cart = [];
+/* Розничные цены можно отредактировать здесь после финального расчёта себестоимости */
+const BASE_PRICE={300:12900,500:18900};
+const PRODUCTS=[
+  {id:1,name:'Белый жемчуг',desc:'чистый тёплый белый',c1:'#f5eee5',c2:'#c8b9a9'},
+  {id:2,name:'Слоновая кость',desc:'мягкий сливочно-бежевый',c1:'#eadbc3',c2:'#b79b78'},
+  {id:3,name:'Пудровый нюд',desc:'чувственный розово-бежевый',c1:'#d6b1aa',c2:'#936b68'},
+  {id:4,name:'Шалфей',desc:'спокойный серо-зелёный',c1:'#abb4a3',c2:'#667462'},
+  {id:5,name:'Графит',desc:'глубокий дымчатый серый',c1:'#565456',c2:'#252426'},
+  {id:6,name:'Бордо',desc:'тёмный винный акцент',c1:'#6b2932',c2:'#2f1116'}
+];
+const cart=[];
+const fmt=n=>n.toLocaleString('ru-RU')+' ₽';
 
-/* ---------- 3D ШАТИН (Three.js) ---------- */
-(function initSilk(){
-  const canvas = document.getElementById('silk');
-  if(!window.THREE){ canvas.style.display='none'; return; }
-  try{
-    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, 2, .1, 100);
-    camera.position.set(0,0,9);
-    const mobile = innerWidth < 700;
-    const geo = new THREE.PlaneGeometry(17,9, mobile?90:140, mobile?50:80);
-    const mat = new THREE.MeshStandardMaterial({color:0xb08d57, roughness:.32, metalness:.55, side:THREE.DoubleSide});
-    const mesh = new THREE.Mesh(geo,mat);
-    mesh.rotation.x = -0.35;
-    scene.add(mesh);
-    scene.add(new THREE.AmbientLight(0xffffff,.35));
-    const l1 = new THREE.DirectionalLight(0xffe0b0,1.1); l1.position.set(3,4,6); scene.add(l1);
-    const l2 = new THREE.DirectionalLight(0x8fb0ff,.45); l2.position.set(-4,-2,4); scene.add(l2);
-    const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
-    const ripples = [];
-    const start = performance.now(), now = () => (performance.now()-start)/1000;
-    function resize(){
-      const w = canvas.clientWidth, h = canvas.clientHeight;
-      renderer.setSize(w,h,false); camera.aspect = w/h; camera.updateProjectionMatrix();
-    }
-    addEventListener('resize', resize); resize();
-    canvas.parentElement.addEventListener('pointermove', e=>{
-      const r = canvas.getBoundingClientRect();
-      mouse.x = ((e.clientX-r.left)/r.width)*2-1;
-      mouse.y = -((e.clientY-r.top)/r.height)*2+1;
-      ray.setFromCamera(mouse,camera);
-      const hit = ray.intersectObject(mesh)[0];
-      if(hit){
-        const p = mesh.worldToLocal(hit.point.clone());
-        ripples.push({x:p.x, y:p.y, t:now()});
-        if(ripples.length>7) ripples.shift();
-      }
-    });
-    const pos = geo.attributes.position;
-    (function tick(){
-      const t = now();
-      while(ripples.length && t-ripples[0].t > 2.2) ripples.shift();
-      for(let i=0;i<pos.count;i++){
-        const x = pos.getX(i), y = pos.getY(i);
-        let z = .28*Math.sin(x*.55+t*.9)*Math.cos(y*.6+t*.7)
-              + .12*Math.sin(x*1.6-t*1.3)*Math.sin(y*1.2+t*.9);
-        for(const r of ripples){
-          const age = t-r.t, d = Math.hypot(x-r.x, y-r.y);
-          z += Math.sin(d*4-age*7)*Math.exp(-d*.9)*Math.exp(-age*1.6)*.3;
-        }
-        pos.setZ(i,z);
-      }
-      pos.needsUpdate = true; geo.computeVertexNormals();
-      renderer.render(scene,camera);
-      requestAnimationFrame(tick);
-    })();
-  }catch(e){ canvas.style.display='none'; }
-})();
-
-/* ---------- ИНТЕРАКТИВНЫЙ ОБРАЗЕЦ ТКАНИ ---------- */
-(function initFabric(){
-  const zone = document.getElementById('fabricZone');
-  const lens = zone.querySelector('.lens');
-  let lastRip = 0, lastVib = 0;
-  zone.addEventListener('pointermove', e=>{
-    const r = zone.getBoundingClientRect();
-    const x = e.clientX-r.left, y = e.clientY-r.top;
-    zone.style.setProperty('--mx', x+'px');
-    zone.style.setProperty('--my', y+'px');
-    lens.style.opacity = 1; lens.style.left = x+'px'; lens.style.top = y+'px';
-    const t = Date.now();
-    if(t-lastRip > 130){
-      const s = document.createElement('span');
-      s.className = 'ripple'; s.style.left = x+'px'; s.style.top = y+'px';
-      zone.appendChild(s); setTimeout(()=>s.remove(), 750);
-      lastRip = t;
-    }
-    if(e.pointerType==='touch' && navigator.vibrate && t-lastVib > 90){
-      navigator.vibrate(4); lastVib = t;   // тактильная отдача на телефоне
-    }
-  });
-  zone.addEventListener('pointerleave', ()=> lens.style.opacity = 0);
-})();
-
-/* ---------- КАТАЛОГ ---------- */
-const grid = document.getElementById('catalogGrid');
-PRODUCTS.forEach(p => {
-  const card = document.createElement('div');
-  card.className = 'card reveal';
-  card.dataset.size = SIZES[0].name;
-  card.innerHTML = `
-    <div class="swatch" style="background:linear-gradient(135deg, ${p.color}, ${shade(p.color)})">
-      <span class="tag">300 TC · Сатин</span>
-    </div>
-    <div class="card-body">
-      <h3>«${p.name}»</h3>
-      <div class="desc">${p.desc} · 100% хлопок</div>
-      <div class="sizes">
-        ${SIZES.map((s,i)=>`<button class="size-pill ${i===0?'active':''}" onclick="pickSize(this,'${s.name}',${s.price})">${s.name}</button>`).join('')}
-      </div>
-      <div class="card-bottom">
-        <div class="price">${fmt(SIZES[0].price)}</div>
-        <button class="add-btn" onclick="addToCart(${p.id}, this)">В корзину</button>
-      </div>
-    </div>`;
-  grid.appendChild(card);
-  addTilt(card);
-});
-
-function shade(hex){
-  const n = parseInt(hex.slice(1),16);
-  const f = c => Math.max(0, Math.round(c*0.86));
-  return `rgb(${f(n>>16)},${f(n>>8&255)},${f(n&255)})`;
+function priceFor(size,tc){return BASE_PRICE[tc]+(tc===300?size.add300:size.add500)}
+function setTC(tc,btn){
+  CURRENT_TC=tc;
+  document.querySelectorAll('.tc-switch button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCatalog();
 }
-
-/* ---------- 3D-НАКЛОН КАРТОЧЕК ---------- */
-function addTilt(el){
-  el.addEventListener('pointermove', e=>{
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX-r.left)/r.width-.5, py = (e.clientY-r.top)/r.height-.5;
-    el.style.setProperty('--cx', (e.clientX-r.left)+'px');
-    el.style.setProperty('--cy', (e.clientY-r.top)+'px');
-    el.style.transform = `perspective(900px) rotateY(${px*7}deg) rotateX(${-py*7}deg) translateY(-4px)`;
-  });
-  el.addEventListener('pointerleave', ()=> el.style.transform = '');
+function renderCatalog(){
+  const grid=document.getElementById('catalogGrid');
+  grid.innerHTML='';
+  PRODUCTS.forEach(p=>{
+    const card=document.createElement('article');
+    card.className='card reveal visible';
+    card.dataset.sizeIndex='0';
+    card.innerHTML=`
+      <div class="swatch" style="--c1:${p.c1};--c2:${p.c2}"><span class="tag">${CURRENT_TC} TC · SATIN</span></div>
+      <div class="card-body">
+        <div class="card-title-row"><div><h3>${p.name}</h3><div class="desc">${p.desc}</div></div><div class="price">${fmt(priceFor(SIZES[0],CURRENT_TC))}</div></div>
+        <div class="product-meta"><span class="meta-chip">100% хлопок</span><span class="meta-chip">4 предмета</span><span class="meta-chip">предзаказ</span></div>
+        <div class="sizes">${SIZES.map((s,i)=>`<button class="size-pill ${i===0?'active':''}" onclick="pickSize(this,${i})">${s.name}</button>`).join('')}</div>
+        <div class="card-bottom"><span class="desc">Пододеяльник · простыня · 2 наволочки</span><button class="add-btn" onclick="addToCart(${p.id},this)">В корзину</button></div>
+      </div>`;
+    grid.appendChild(card);
+  })
 }
+function pickSize(btn,index){
+  const card=btn.closest('.card');
+  card.dataset.sizeIndex=index;
+  card.querySelectorAll('.size-pill').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  card.querySelector('.price').textContent=fmt(priceFor(SIZES[index],CURRENT_TC));
+}
+function addToCart(id,btn){
+  const cardEl=btn.closest('.card');
+  const sizeIndex=+cardEl.dataset.sizeIndex;
+  const key=`${id}-${CURRENT_TC}-${sizeIndex}`;
+  const found=cart.find(x=>x.key===key);
+  if(found)found.qty++;
+  else cart.push({key,id,tc:CURRENT_TC,sizeIndex,qty:1,price:priceFor(SIZES[sizeIndex],CURRENT_TC)});
+  updateCart();showToast('Комплект добавлен в предзаказ');
+}
+function updateCart(){
+  const box=document.getElementById('cartItems');
+  document.getElementById('cartCount').textContent=cart.reduce((a,b)=>a+b.qty,0);
+  box.innerHTML=cart.length?cart.map((i,idx)=>{
+    const p=PRODUCTS.find(x=>x.id===i.id),s=SIZES[i.sizeIndex];
+    return `<div class="cart-item"><div><div class="ci-name">${p.name} · ${i.tc} TC</div><div class="ci-size">Матрас ${s.name}</div><div class="ci-controls"><button class="qty-btn" onclick="changeQty(${idx},-1)">−</button><span>${i.qty}</span><button class="qty-btn" onclick="changeQty(${idx},1)">+</button><button class="ci-remove" onclick="removeItem(${idx})">убрать</button></div></div><div class="ci-price">${fmt(i.price*i.qty)}</div></div>`
+  }).join(''):'<div class="cart-empty">Корзина пока пуста.<br>Выберите оттенок, плотность и размер.</div>';
+  document.getElementById('cartTotal').textContent=fmt(cart.reduce((a,b)=>a+b.price*b.qty,0));
+}
+function changeQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);updateCart()}
+function removeItem(i){cart.splice(i,1);updateCart()}
+function toggleCart(open){document.getElementById('cartPanel').classList.toggle('open',open);document.getElementById('overlay').classList.toggle('show',open);document.body.classList.toggle('lock',open)}
+function checkout(){
+  if(!cart.length)return showToast('Сначала добавьте комплект');
+  const lines=['Здравствуйте! Хочу оформить предзаказ DIVA:'];
+  cart.forEach((i,n)=>{const p=PRODUCTS.find(x=>x.id===i.id),s=SIZES[i.sizeIndex];lines.push(`${n+1}. ${p.name}, ${i.tc} TC, матрас ${s.name}, ${i.qty} шт. — ${fmt(i.price*i.qty)}`)});
+  lines.push(`Итого: ${fmt(cart.reduce((a,b)=>a+b.price*b.qty,0))}`,'Подскажите, пожалуйста, сроки и условия предзаказа.');
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`,'_blank');
+}
+function leadSubmit(e){
+  e.preventDefault();
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const interest=document.getElementById('interest').value;
+  const text=`Здравствуйте! Хочу получить доступ к предзаказу DIVA.%0AИмя: ${encodeURIComponent(name)}%0AКонтакт: ${encodeURIComponent(phone)}%0AИнтерес: ${encodeURIComponent(interest)}`;
+  window.open(`https://wa.me/${PHONE}?text=${text}`,'_blank');
+}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
 
-/* ---------- ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ ---------- */
-const io = new IntersectionObserver(es=>es.forEach(en=>{
-  if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
-}),{threshold:.12});
+/* header */
+addEventListener('scroll',()=>document.getElementById('header').classList.toggle('scrolled',scrollY>30));
+
+/* reveal */
+const io=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ---------- КОРЗИНА И ЗАКАЗ ---------- */
-function pickSize(btn, name, price){
-  const card = btn.closest('.card');
-  card.querySelectorAll('.size-pill').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  card.dataset.size = name;
-  card.querySelector('.price').textContent = fmt(price);
-}
-function addToCart(id, btn){
-  const size = btn.closest('.card').dataset.size;
-  const price = SIZES.find(s=>s.name===size).price;
-  const found = cart.find(i=>i.id===id && i.size===size);
-  found ? found.qty++ : cart.push({id, size, price, qty:1});
-  updateCart(); showToast();
-}
-function changeQty(idx, d){ cart[idx].qty += d; if(cart[idx].qty<=0) cart.splice(idx,1); updateCart(); }
-function removeItem(idx){ cart.splice(idx,1); updateCart(); }
-function updateCart(){
-  const box = document.getElementById('cartItems');
-  document.getElementById('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0);
-  box.innerHTML = !cart.length
-    ? '<div class="cart-empty">Корзина пока пуста.<br>Выберите комплект из коллекции 🤍</div>'
-    : cart.map((i,idx)=>{
-        const p = PRODUCTS.find(x=>x.id===i.id);
-        return `<div class="cart-item">
-          <div>
-            <div class="ci-name">«${p.name}»</div>
-            <div class="ci-size">Размер: ${i.size}</div>
-            <div class="ci-controls">
-              <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
-              <span>${i.qty}</span>
-              <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
-              <button class="ci-remove" onclick="removeItem(${idx})">убрать</button>
-            </div>
-          </div>
-          <div class="ci-price">${fmt(i.price*i.qty)}</div>
-        </div>`;
-      }).join('');
-  document.getElementById('cartTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
-}
-function toggleCart(open){
-  document.getElementById('cartPanel').classList.toggle('open', open);
-  document.getElementById('overlay').classList.toggle('show', open);
-}
-function checkout(){
-  if(!cart.length){ showToast('Корзина пуста'); return; }
-  const lines = ['Здравствуйте! Хочу заказать постельное бельё DIVA:'];
-  cart.forEach((i,n)=>{
-    const p = PRODUCTS.find(x=>x.id===i.id);
-    lines.push(`${n+1}. «${p.name}», размер ${i.size}, ${i.qty} шт. — ${fmt(i.price*i.qty)}`);
-  });
-  lines.push(`Итого: ${fmt(cart.reduce((s,i)=>s+i.price*i.qty,0))}`);
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
-}
-function showToast(msg='Добавлено в корзину ✓'){
-  const t = document.getElementById('toast');
-  if(msg) t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2200);
-}
+/* interactive fabric */
+(function(){
+ const z=document.getElementById('fabricZone'),lens=z.querySelector('.lens');let last=0;
+ z.addEventListener('pointermove',e=>{const r=z.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;z.style.setProperty('--mx',x+'px');z.style.setProperty('--my',y+'px');lens.style.left=x+'px';lens.style.top=y+'px';lens.style.opacity=1;const n=Date.now();if(n-last>150){const s=document.createElement('span');s.className='ripple';s.style.left=x+'px';s.style.top=y+'px';z.appendChild(s);setTimeout(()=>s.remove(),850);last=n}if(e.pointerType==='touch'&&navigator.vibrate)navigator.vibrate(3)});
+ z.addEventListener('pointerleave',()=>lens.style.opacity=0)
+})();
 
-/* Контакты */
-document.getElementById('waLink').href = `https://wa.me/${PHONE}`;
-document.getElementById('tgLink').href = `https://t.me/${TELEGRAM}`;
-document.getElementById('phoneLink').href = `tel:+${PHONE}`;
-document.getElementById('phoneLink').textContent = '+7 923 631-61-36';
+/* three.js satin */
+(function(){
+ const canvas=document.getElementById('silk');if(!window.THREE){canvas.style.display='none';return}
+ try{
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(50,2,.1,100);camera.position.set(0,0,8.5);
+  const mobile=innerWidth<700,geo=new THREE.PlaneGeometry(17,10,mobile?70:130,mobile?44:76);
+  const mat=new THREE.MeshStandardMaterial({color:0x7b3139,roughness:.27,metalness:.46,side:THREE.DoubleSide});
+  const mesh=new THREE.Mesh(geo,mat);mesh.rotation.x=-.34;mesh.position.x=2.4;scene.add(mesh);
+  scene.add(new THREE.AmbientLight(0xffffff,.32));
+  const l1=new THREE.DirectionalLight(0xffd7b3,1.1);l1.position.set(3,4,5);scene.add(l1);
+  const l2=new THREE.DirectionalLight(0x8f647d,.58);l2.position.set(-4,-2,4);scene.add(l2);
+  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}addEventListener('resize',resize);resize();
+  const pos=geo.attributes.position,start=performance.now();
+  (function tick(){const t=(performance.now()-start)/1000;for(let i=0;i<pos.count;i++){const x=pos.getX(i),y=pos.getY(i);pos.setZ(i,.33*Math.sin(x*.48+t*.7)*Math.cos(y*.55+t*.45)+.12*Math.sin(x*1.35-t*.9)*Math.sin(y*1.05+t*.65))}pos.needsUpdate=true;geo.computeVertexNormals();renderer.render(scene,camera);requestAnimationFrame(tick)})();
+ }catch(e){canvas.style.display='none'}
+})();
 
-updateCart();
+document.getElementById('waLink').href=`https://wa.me/${PHONE}`;
+document.getElementById('tgLink').href=`https://t.me/${TELEGRAM}`;
+renderCatalog();updateCart();
 </script>
-</body>
-</html>
 </body>
 </html>
