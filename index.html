@@ -14,9 +14,9 @@ a{color:inherit;text-decoration:none}
 button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer}
 .micro{font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--dim)}
 .wrap{max-width:1400px;margin:0 auto;padding:0 5vw}
-#loader{position:fixed;inset:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:center}
-#loader span{font-family:var(--serif);font-size:26px;letter-spacing:.55em;opacity:0;animation:lin 1.4s ease forwards}
-#loader span:nth-child(2){animation-delay:.12s}#loader span:nth-child(3){animation-delay:.24s}#loader span:nth-child(4){animation-delay:.36s}
+#loader{position:fixed;inset:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:center;transition:opacity .6s}
+#loader span{font-family:var(--serif);font-size:26px;letter-spacing:.55em;opacity:0;animation:lin 1.2s ease forwards}
+#loader span:nth-child(2){animation-delay:.1s}#loader span:nth-child(3){animation-delay:.2s}#loader span:nth-child(4){animation-delay:.3s}
 @keyframes lin{to{opacity:1}}
 #cursor{position:fixed;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:99;display:none}
 @media(pointer:fine){#cursor{display:block}}
@@ -29,7 +29,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-conte
 .cart-count{position:absolute;top:-7px;right:-7px;background:var(--gold);color:#fff;font-size:10px;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 @media(max-width:640px){.head-links a[href="#fabric"]{display:none}}
 .hero{position:relative;height:100svh;min-height:640px;overflow:hidden;display:flex;align-items:flex-end}
-.hero-bg{position:absolute;inset:-6%;background:#0a0a0a url('black.jpg') center/cover;filter:brightness(.5) contrast(1.08)}
+.hero-bg{position:absolute;inset:-6%;background:#0a0a0a center/cover;filter:brightness(.5) contrast(1.08)}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 45%)}
 .hero-content{position:relative;z-index:2;padding:0 5vw 12vh}
 .hero .micro{display:block;margin-bottom:26px}
@@ -220,12 +220,12 @@ html.lenis,html.lenis body{height:auto}
 </section>
 
 <section class="film" id="filmTouch">
-  <video muted loop playsinline preload="metadata"><source src="touch.mp4" type="video/mp4"></video>
+  <video muted loop playsinline preload="none" poster="black.jpg"><source src="touch.mp4" type="video/mp4"></video>
   <div class="film-caption micro">Прикосновение</div>
 </section>
 
 <section class="film">
-  <video muted loop playsinline preload="metadata"><source src="video.mp4" type="video/mp4"></video>
+  <video muted loop playsinline preload="none" poster="bed-black.jpg"><source src="video.mp4" type="video/mp4"></video>
   <div class="film-fallback" data-parallax></div>
   <div class="film-caption micro">DIVA — film · нажмите, чтобы остановить</div>
 </section>
@@ -269,12 +269,11 @@ html.lenis,html.lenis body{height:auto}
   <span class="micro"><a href="https://wa.me/79236316136" target="_blank">WhatsApp</a> &nbsp;·&nbsp; <a href="https://t.me/Stykket" target="_blank">Telegram</a> &nbsp;·&nbsp; <a href="tel:+79236316136">+7 923 631-61-36</a></span>
 </footer>
 
-<!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
 <div class="pmodal" id="pmodal">
   <button class="pm-close" onclick="closeProduct()">×</button>
   <div class="pm-wrap">
     <div>
-      <img class="pm-main" id="pmMain" src="" alt="">
+      <img class="pm-main" id="pmMain" src="" alt="" loading="lazy">
       <div class="pm-thumbs" id="pmThumbs"></div>
     </div>
     <div>
@@ -291,7 +290,6 @@ html.lenis,html.lenis body{height:auto}
   </div>
 </div>
 
-<!-- КОРЗИНА -->
 <div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
 <aside class="cart" id="cartPanel">
   <div class="cart-head">
@@ -314,7 +312,6 @@ html.lenis,html.lenis body{height:auto}
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* ====== ВАШИ ДАННЫЕ ====== */
 const PHONE = '79236316136';
 const PRICES = { '300': 12900, '500': 16900 };
 const SIZES = [
@@ -332,7 +329,6 @@ const COLORS = [
   { name:'Шалфей',         key:'sage',     c:'#a5afa0' },
   { name:'Изумруд',        key:'emerald',  c:'#24473a' },
 ];
-/* ========================= */
 
 const fmt = n => n.toLocaleString('ru-RU') + ' ₽';
 const cart = [];
@@ -351,16 +347,24 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',
   if(t && window._lenis){ e.preventDefault(); _lenis.scrollTo(t,{ offset:0 }); }
 }));
 
-/* Loader + hero */
-window.addEventListener('load', () => {
-  const tl = gsap.timeline({ defaults:{ ease:'power4.out' } });
-  tl.to('#loader', { autoAlpha:0, duration:.9, delay:.7, ease:'power2.inOut' })
-    .from('.hero .line-inner', { yPercent:115, duration:1.4, stagger:.14 }, '-=.25')
-    .from('.hero .micro', { autoAlpha:0, y:24, duration:1 }, '-=.9')
-    .from('.scroll-hint', { autoAlpha:0, duration:1 }, '-=.7');
-  gsap.fromTo('#heroBg', { scale:1.15 }, { scale:1.02, duration:3.2, ease:'power2.out', delay:.8 });
-  gsap.to('#heroBg', { scale:1.1, duration:16, ease:'sine.inOut', yoyo:true, repeat:-1, delay:4 });
-});
+/* Быстрый лоадер — не ждём все ресурсы */
+(function(){
+  const loader = document.getElementById('loader');
+  const heroBg = document.getElementById('heroBg');
+  // Грузим hero-фото отдельно, не блокируя лоадер
+  const img = new Image();
+  img.src = 'black.jpg';
+  img.onload = () => heroBg.style.backgroundImage = `url('black.jpg')`;
+  // Лоадер уходит через 1.2 сек максимум
+  setTimeout(()=>{
+    gsap.to(loader, { autoAlpha:0, duration:.6, ease:'power2.inOut', onComplete:()=> loader.style.display='none' });
+    gsap.from('.hero .line-inner', { yPercent:115, duration:1.4, stagger:.14, ease:'power4.out', delay:.1 });
+    gsap.from('.hero .micro', { autoAlpha:0, y:24, duration:1, delay:.3 });
+    gsap.from('.scroll-hint', { autoAlpha:0, duration:1, delay:.5 });
+    gsap.fromTo(heroBg, { scale:1.15 }, { scale:1.02, duration:3.2, ease:'power2.out' });
+    gsap.to(heroBg, { scale:1.1, duration:16, ease:'sine.inOut', yoyo:true, repeat:-1, delay:3.5 });
+  }, 1200);
+})();
 
 gsap.from('.statement .line-inner', {
   yPercent:115, duration:1.3, stagger:.16, ease:'power4.out',
@@ -379,7 +383,7 @@ gsap.utils.toArray('[data-reveal]').forEach(el => {
     scrollTrigger:{ trigger:el, start:'top 88%' } });
 });
 
-/* FABRIC EXPERIENCE */
+/* FABRIC */
 const FABRICS = {
   '300':   { name:'Сатин 300 TC',   desc:'Шелковистый блеск и плотность, которая обнимает.', feel:'гладкий · блестящий' },
   '500':   { name:'Сатин 500 TC',   desc:'Плотнее, тяжелее, глубже блеск. Для тех, кто спит серьёзно.', feel:'плотный · атласный' },
@@ -425,27 +429,31 @@ viewer.addEventListener('pointermove', e => {
   viewer.style.setProperty('--my', (e.clientY-r.top)+'px');
 });
 
-/* FILM */
+/* FILM — ленивая загрузка видео */
 document.querySelectorAll('section.film').forEach(sec => {
   const v = sec.querySelector('video'), fb = sec.querySelector('.film-fallback');
   const src = v.querySelector('source');
   src.addEventListener('error', () => { if(fb){ v.style.display='none'; } else { sec.style.display='none'; } });
   v.addEventListener('loadeddata', () => { if(fb) fb.style.display='none'; });
   ScrollTrigger.create({
-    trigger:sec, start:'top bottom', end:'bottom top',
-    onEnter:()=> v.play().catch(()=>{}), onLeave:()=> v.pause(),
-    onEnterBack:()=> v.play().catch(()=>{}), onLeaveBack:()=> v.pause()
+    trigger:sec, start:'top 80%', end:'bottom 20%',
+    onEnter:()=>{ v.preload='auto'; v.load(); v.play().catch(()=>{}); },
+    onLeave:()=> v.pause(),
+    onEnterBack:()=>{ v.play().catch(()=>{}); },
+    onLeaveBack:()=> v.pause()
   });
   v.addEventListener('click', ()=> v.paused ? v.play() : v.pause());
 });
 
-/* COLLECTION */
+/* COLLECTION — lazy load фото */
 const collGrid = document.getElementById('collGrid');
 COLORS.forEach((col,i) => {
   const card = document.createElement('button');
   card.className = 'coll-card';
   card.innerHTML = `
-    <div class="coll-swatch" style="background-image:url('${col.key}.jpg')"></div>
+    <div class="coll-swatch" style="background-color:${col.c}">
+      <img src="${col.key}.jpg" alt="${col.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s" onload="this.style.opacity=1">
+    </div>
     <div class="coll-meta">
       <span class="coll-name">${col.name}</span>
       <span class="coll-price">от ${fmt(PRICES[curTC])}</span>
@@ -479,14 +487,11 @@ function renderModal(){
   const basePrice = PRICES[modalState.tc];
   const sizePrice = SIZES[modalState.sizeIdx].price;
   const total = basePrice + sizePrice;
-
   document.getElementById('pmName').textContent = col.name;
   document.getElementById('pmPrice').textContent = fmt(total);
-
   const imgs = [`${col.key}.jpg`, `bed-${col.key}.jpg`, modalState.colorIdx===6 ? 'spalnya-izumrud.jpg' : `room-${col.key}.jpg`];
   document.getElementById('pmMain').src = imgs[0];
-  document.getElementById('pmThumbs').innerHTML = imgs.map((src,i)=>`<img class="pm-thumb ${i===0?'active':''}" src="${src}" onclick="switchThumb(this,'${src}')" onerror="this.style.display='none'">`).join('');
-
+  document.getElementById('pmThumbs').innerHTML = imgs.map((src,i)=>`<img class="pm-thumb ${i===0?'active':''}" src="${src}" loading="lazy" onclick="switchThumb(this,'${src}')" onerror="this.style.display='none'">`).join('');
   document.getElementById('pmColors').innerHTML = COLORS.map((c,i)=>`<button class="dot ${i===modalState.colorIdx?'active':''}" style="background:${c.c}" onclick="modalState.colorIdx=${i};renderModal()"></button>`).join('');
   document.getElementById('pmTC').innerHTML = ['300','500'].map(tc=>`<button class="pill ${tc===modalState.tc?'active':''}" onclick="modalState.tc='${tc}';renderModal()">${tc} TC</button>`).join('');
   document.getElementById('pmSizes').innerHTML = SIZES.map((s,i)=>`<button class="pill ${i===modalState.sizeIdx?'active':''}" onclick="modalState.sizeIdx=${i};renderModal()">${s.name}</button>`).join('');
@@ -506,9 +511,7 @@ function addToCartFromModal(){
   const item = { color:col.name, tc:modalState.tc, size:SIZES[modalState.sizeIdx].name, price:total, qty:1 };
   const found = cart.find(i=>i.color===item.color && i.tc===item.tc && i.size===item.size);
   found ? found.qty++ : cart.push(item);
-  updateCart();
-  closeProduct();
-  showToast();
+  updateCart(); closeProduct(); showToast();
 }
 function changeQty(idx, d){ cart[idx].qty += d; if(cart[idx].qty<=0) cart.splice(idx,1); updateCart(); }
 function removeItem(idx){ cart.splice(idx,1); updateCart(); }
@@ -517,19 +520,7 @@ function updateCart(){
   document.getElementById('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0);
   box.innerHTML = !cart.length
     ? '<div class="cart-empty">Корзина пока пуста.<br>Выберите комплект из коллекции 🤍</div>'
-    : cart.map((i,idx)=>`<div class="ci">
-        <div>
-          <div class="ci-name">${i.color}</div>
-          <div class="ci-meta">${i.tc} TC · ${i.size}</div>
-          <div class="ci-controls">
-            <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
-            <span>${i.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
-            <button class="ci-remove" onclick="removeItem(${idx})">убрать</button>
-          </div>
-        </div>
-        <div class="ci-price">${fmt(i.price*i.qty)}</div>
-      </div>`).join('');
+    : cart.map((i,idx)=>`<div class="ci"><div><div class="ci-name">${i.color}</div><div class="ci-meta">${i.tc} TC · ${i.size}</div><div class="ci-controls"><button class="qty-btn" onclick="changeQty(${idx},-1)">−</button><span>${i.qty}</span><button class="qty-btn" onclick="changeQty(${idx},1)">+</button><button class="ci-remove" onclick="removeItem(${idx})">убрать</button></div></div><div class="ci-price">${fmt(i.price*i.qty)}</div></div>`).join('');
   document.getElementById('cartTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
 }
 function toggleCart(open){
@@ -550,7 +541,6 @@ function showToast(msg='Добавлено в корзину ✓'){
   setTimeout(()=>t.classList.remove('show'), 2200);
 }
 
-/* Cursor */
 if(matchMedia('(pointer:fine)').matches){
   const cx = gsap.quickTo('#cursor','x',{ duration:.55, ease:'power3' });
   const cy = gsap.quickTo('#cursor','y',{ duration:.55, ease:'power3' });
