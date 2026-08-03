@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SATINE — премиальное постельное бельё 300 TC</title>
+<meta name="description" content="Премиальное постельное бельё из сатина 300 TC. 100% длинноволокнистый хлопок. Доставка по всей России.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf7f1; --ink:#26211b; --soft:#6f6659;
+    --gold:#a8865a; --gold-dark:#8d6f47;
+    --card:#ffffff; --line:#e9e1d4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+  section{padding:80px 0}
+  .section-title{font-size:clamp(28px,4vw,40px);text-align:center;margin-bottom:12px}
+  .section-sub{text-align:center;color:var(--soft);max-width:560px;margin:0 auto 48px}
+
+  /* Шапка */
+  header{position:sticky;top:0;z-index:50;background:rgba(250,247,241,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:4px;text-decoration:none;color:var(--ink)}
+  .logo span{color:var(--gold)}
+  .nav-links{display:flex;gap:28px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--soft);font-size:14px;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--gold)}
+  .cart-btn{position:relative;background:none;border:1px solid var(--ink);border-radius:30px;padding:9px 20px;font-family:inherit;font-size:14px;cursor:pointer;transition:.2s}
+  .cart-btn:hover{background:var(--ink);color:#fff}
+  .cart-count{position:absolute;top:-7px;right:-7px;background:var(--gold);color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 4px}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* Хиро */
+  .hero{padding:90px 0 100px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .hero-eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:12px;color:var(--gold);font-weight:700;margin-bottom:18px}
+  .hero h1{font-size:clamp(34px,5vw,54px);line-height:1.15;margin-bottom:20px}
+  .hero p{color:var(--soft);font-size:17px;max-width:440px;margin-bottom:32px}
+  .btn{display:inline-block;padding:15px 34px;border-radius:40px;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:.25s}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{background:var(--gold)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);margin-left:12px}
+  .btn-ghost:hover{background:var(--ink);color:#fff}
+  .hero-visual{position:relative;height:400px}
+  .fold{position:absolute;border-radius:18px;box-shadow:0 24px 50px rgba(38,33,27,.14)}
+  .fold1{width:70%;height:60%;bottom:0;left:0;background:linear-gradient(135deg,#efe9df,#dcd2c0)}
+  .fold2{width:60%;height:52%;bottom:12%;left:20%;background:linear-gradient(135deg,#d9b8b4,#c39a97);z-index:2}
+  .fold3{width:52%;height:44%;bottom:26%;left:42%;background:linear-gradient(135deg,#41503f,#2e4d3f);z-index:3}
+  .hero-badge{position:absolute;z-index:4;top:6%;right:4%;background:#fff;border-radius:50%;width:110px;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(38,33,27,.16);text-align:center}
+  .hero-badge b{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold)}
+  .hero-badge small{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--soft)}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-visual{height:320px;margin-top:10px}}
+
+  /* Преимущества */
+  .features{background:#fff;border-block:1px solid var(--line);padding:60px 0}
+  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+  .feat{text-align:center}
+  .feat .ico{font-size:30px;margin-bottom:12px}
+  .feat h3{font-size:18px;margin-bottom:6px}
+  .feat p{font-size:14px;color:var(--soft)}
+
+  /* Каталог */
+  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(38,33,27,.1)}
+  .swatch{height:220px;position:relative}
+  .swatch::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),repeating-linear-gradient(-45deg,rgba(0,0,0,.035) 0 2px,transparent 2px 5px)}
+  .swatch .tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(255,255,255,.9);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;font-weight:700;color:var(--ink)}
+  .card-body{padding:22px;display:flex;flex-direction:column;flex:1}
+  .card-body h3{font-size:21px;margin-bottom:4px}
+  .card-body .desc{font-size:13px;color:var(--soft);margin-bottom:16px}
+  .sizes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .size-pill{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 13px;font-size:12px;cursor:pointer;font-family:inherit;transition:.2s}
+  .size-pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .card-bottom{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .price{font-family:'Playfair Display',serif;font-size:22px;white-space:nowrap}
+  .add-btn{background:var(--gold);color:#fff;border:none;border-radius:30px;padding:12px 22px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s}
+  .add-btn:hover{background:var(--gold-dark)}
+
+  /* Как заказать */
+  .steps{background:#fff;border-block:1px solid var(--line)}
+  .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:32px}
+  .step{text-align:center;padding:0 10px}
+  .step .num{font-family:'Playfair Display',serif;font-size:40px;color:var(--gold);margin-bottom:8px}
+  .step h3{font-size:17px;margin-bottom:6px}
+  .step p{font-size:14px;color:var(--soft)}
+
+  /* Контакты */
+  .contacts{text-align:center}
+  .contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  .contact-links a{text-decoration:none;color:var(--ink);border:1px solid var(--line);background:#fff;border-radius:30px;padding:13px 26px;font-weight:600;font-size:14px;transition:.2s}
+  .contact-links a:hover{border-color:var(--gold);color:var(--gold)}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;font-size:13px;color:var(--soft)}
+
+  /* Корзина */
+  .overlay{position:fixed;inset:0;background:rgba(38,33,27,.4);opacity:0;pointer-events:none;transition:.3s;z-index:90}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .cart{position:fixed;top:0;right:-440px;width:420px;max-width:100%;height:100%;background:#fff;z-index:100;transition:right .35s;display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.12)}
+  .cart.open{right:0}
+  .cart-head{display:flex;justify-content:space-between;align-items:center;padding:22px;border-bottom:1px solid var(--line)}
+  .cart-head h3{font-size:22px}
+  .cart-close{background:none;border:none;font-size:26px;cursor:pointer;color:var(--soft)}
+  .cart-items{flex:1;overflow-y:auto;padding:20px 22px}
+  .cart-empty{text-align:center;color:var(--soft);padding:60px 20px}
+  .cart-item{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .ci-name{font-weight:600;font-size:14px}
+  .ci-size{font-size:12px;color:var(--soft)}
+  .ci-controls{display:flex;align-items:center;gap:10px;margin-top:8px}
+  .qty-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:15px;line-height:1}
+  .ci-remove{background:none;border:none;color:#c0392b;font-size:12px;cursor:pointer;text-decoration:underline}
+  .ci-price{font-weight:700;white-space:nowrap}
+  .cart-foot{padding:22px;border-top:1px solid var(--line)}
+  .cart-total{display:flex;justify-content:space-between;font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px}
+  .wa-btn{display:block;width:100%;background:#23a455;color:#fff;text-align:center;border:none;border-radius:34px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+  .wa-btn:hover{background:#1c8a47}
+  .cart-note{font-size:12px;color:var(--soft);text-align:center;margin-top:10px}
+
+  /* Тост */
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:13px 28px;border-radius:30px;font-size:14px;opacity:0;transition:.35s;z-index:120;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">SATI<span>N</span>E</a>
+    <ul class="nav-links">
+      <li><a href="#catalog">Коллекция</a></li>
+      <li><a href="#about">О ткани</a></li>
+      <li><a href="#how">Как заказать</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <button class="cart-btn" onclick="toggleCart(true)">Корзина <span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-eyebrow">Премиальный сатин · 300 TC</div>
+      <h1>Сон, к которому хочется возвращаться</h1>
+      <p>Постельное бельё из длинноволокнистого хлопка плотностью 300 нитей на дюйм². Шелковистое, дышащее, долговечное.</p>
+      <a href="#catalog" class="btn btn-primary">Смотреть коллекцию</a>
+      <a href="#how" class="btn btn-ghost">Как заказать</a>
+    </div>
+    <div class="hero-visual">
+      <div class="fold fold1"></div>
+      <div class="fold fold2"></div>
+      <div class="fold fold3"></div>
+      <div class="hero-badge"><b>300</b><small>Thread Count</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="about">
+  <div class="wrap feat-grid">
+    <div class="feat"><div class="ico">🌿</div><h3>100% хлопок</h3><p>Длинноволокнистый египетский хлопок без синтетики</p></div>
+    <div class="feat"><div class="ico">✨</div><h3>300 TC</h3><p>Высокая плотность: ткань гладкая и при этом дышащая</p></div>
+    <div class="feat"><div class="ico">🤍</div><h3>Аккуратные детали</h3><p>Скрытая молния, клапаны, усиленные швы</p></div>
+    <div class="feat"><div class="ico">🎁</div><h3>Подарочная упаковка</h3><p>Каждый комплект — в фирменной коробке с лентой</p></div>
+  </div>
+</section>
+
+<section id="catalog">
+  <div class="wrap">
+    <h2 class="section-title">Коллекция</h2>
+    <p class="section-sub">Шесть благородных оттенков. Выберите размер — и комплект отправится в корзину.</p>
+    <div class="catalog-grid" id="catalogGrid"></div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <h2 class="section-title">Как заказать</h2>
+    <p class="section-sub">Всё просто — три шага до идеального сна</p>
+    <div class="steps-grid">
+      <div class="step"><div class="num">1</div><h3>Выберите комплект</h3><p>Цвет и размер — в карточках товара выше</p></div>
+      <div class="step"><div class="num">2</div><h3>Добавьте в корзину</h3><p>Нажмите «В корзину» — заказ соберётся автоматически</p></div>
+      <div class="step"><div class="num">3</div><h3>Оформите в WhatsApp</h3><p>Мы подтвердим заказ, оплату и доставку по всей России</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contacts" id="contacts">
+  <div class="wrap">
+    <h2 class="section-title">Остались вопросы?</h2>
+    <p class="section-sub">Напишите нам — поможем подобрать размер и цвет</p>
+    <div class="contact-links">
+      <a id="waLink" href="#" target="_blank">WhatsApp</a>
+      <a id="tgLink" href="#" target="_blank">Telegram</a>
+      <a id="phoneLink" href="#">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 SATINE · Премиальное постельное бельё 300 TC · Сделано с любовью к сну</div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<aside class="cart" id="cartPanel">
+  <div class="cart-head">
+    <h3>Ваш заказ</h3>
+    <button class="cart-close" onclick="toggleCart(false)">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Итого:</span><span id="cartTotal">0 ₽</span></div>
+    <button class="wa-btn" onclick="checkout()">Оформить через WhatsApp</button>
+    <div class="cart-note">Откроется чат с готовым текстом заказа</div>
+  </div>
+</aside>
+
+<div class="toast" id="toast">Добавлено в корзину ✓</div>
+
+<script>
+/* ====== НАСТРОЙТЕ ПОД СЕБЯ ====== */
+const PHONE = '79000000000';      // ← ваш номер WhatsApp, формат 7XXXXXXXXXX
+const TELEGRAM = 'your_username'; // ← ваш Telegram без @
+/* ================================= */
+
+const SIZES = [
+  { name:'1,5-спальный', price:8900 },
+  { name:'2-спальный',   price:10900 },
+  { name:'Евро',         price:12900 },
+  { name:'Семейный',     price:13900 },
+];
+
+const PRODUCTS = [
+  { id:1, name:'Белый жемчуг',    desc:'Классический тёплый белый',     color:'#efe9df' },
+  { id:2, name:'Слоновая кость',  desc:'Нежный кремово-золотистый',     color:'#e5d8bf' },
+  { id:3, name:'Пудровая роза',   desc:'Приглушённый розово-бежевый',   color:'#d9b8b4' },
+  { id:4, name:'Шалфей',          desc:'Мягкий серо-зелёный',           color:'#a9b49f' },
+  { id:5, name:'Графит',          desc:'Глубокий тёмно-серый',          color:'#4b4b4e' },
+  { id:6, name:'Изумрудная ночь', desc:'Насыщенный тёмно-зелёный',      color:'#2e4d3f' },
+];
+
+const fmt = n => n.toLocaleString('ru-RU') + ' ₽';
+const cart = []; // {id, size, price, qty}
+
+/* Рендер каталога */
+const grid = document.getElementById('catalogGrid');
+PRODUCTS.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.size = SIZES[0].name;
+  card.innerHTML = `
+    <div class="swatch" style="background:linear-gradient(135deg, ${p.color}, ${shade(p.color)})">
+      <span class="tag">300 TC · Сатин</span>
+    </div>
+    <div class="card-body">
+      <h3>«${p.name}»</h3>
+      <div class="desc">${p.desc} · 100% хлопок</div>
+      <div class="sizes">
+        ${SIZES.map((s,i)=>`<button class="size-pill ${i===0?'active':''}" onclick="pickSize(this,'${s.name}',${s.price})">${s.name}</button>`).join('')}
+      </div>
+      <div class="card-bottom">
+        <div class="price">${fmt(SIZES[0].price)}</div>
+        <button class="add-btn" onclick="addToCart(${p.id}, this)">В корзину</button>
+      </div>
+    </div>`;
+  grid.appendChild(card);
+});
+
+function shade(hex){ // чуть темнее для градиента
+  const n = parseInt(hex.slice(1),16);
+  const f = c => Math.max(0, Math.round(c*0.86));
+  return `rgb(${f(n>>16)},${f(n>>8&255)},${f(n&255)})`;
+}
+
+function pickSize(btn, name, price){
+  const card = btn.closest('.card');
+  card.querySelectorAll('.size-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  card.dataset.size = name;
+  card.querySelector('.price').textContent = fmt(price);
+}
+
+function addToCart(id, btn){
+  const size = btn.closest('.card').dataset.size;
+  const price = SIZES.find(s=>s.name===size).price;
+  const found = cart.find(i=>i.id===id && i.size===size);
+  found ? found.qty++ : cart.push({id, size, price, qty:1});
+  updateCart(); showToast();
+}
+
+function changeQty(idx, d){
+  cart[idx].qty += d;
+  if(cart[idx].qty<=0) cart.splice(idx,1);
+  updateCart();
+}
+function removeItem(idx){ cart.splice(idx,1); updateCart(); }
+
+function updateCart(){
+  const box = document.getElementById('cartItems');
+  const count = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent = count;
+  if(!cart.length){
+    box.innerHTML = '<div class="cart-empty">Корзина пока пуста.<br>Выберите комплект из коллекции 🤍</div>';
+  } else {
+    box.innerHTML = cart.map((i,idx)=>{
+      const p = PRODUCTS.find(x=>x.id===i.id);
+      return `<div class="cart-item">
+        <div>
+          <div class="ci-name">«${p.name}»</div>
+          <div class="ci-size">Размер: ${i.size}</div>
+          <div class="ci-controls">
+            <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+            <span>${i.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+            <button class="ci-remove" onclick="removeItem(${idx})">убрать</button>
+          </div>
+        </div>
+        <div class="ci-price">${fmt(i.price*i.qty)}</div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('cartTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
+}
+
+function toggleCart(open){
+  document.getElementById('cartPanel').classList.toggle('open', open);
+  document.getElementById('overlay').classList.toggle('show', open);
+}
+
+function checkout(){
+  if(!cart.length){ showToast('Корзина пуста'); return; }
+  const lines = ['Здравствуйте! Хочу заказать постельное бельё SATINE:'];
+  cart.forEach((i,n)=>{
+    const p = PRODUCTS.find(x=>x.id===i.id);
+    lines.push(`${n+1}. «${p.name}», размер ${i.size}, ${i.qty} шт. — ${fmt(i.price*i.qty)}`);
+  });
+  lines.push(`Итого: ${fmt(cart.reduce((s,i)=>s+i.price*i.qty,0))}`);
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+}
+
+function showToast(msg='Добавлено в корзину ✓'){
+  const t = document.getElementById('toast');
+  if(msg) t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+/* Контакты */
+document.getElementById('waLink').href = `https://wa.me/${PHONE}`;
+document.getElementById('tgLink').href = `https://t.me/${TELEGRAM}`;
+document.getElementById('phoneLink').href = `tel:+${PHONE}`;
+document.getElementById('phoneLink').textContent = '+' + PHONE;
+
+updateCart();
+</script>
+</body>
+</html>
