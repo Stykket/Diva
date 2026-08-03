@@ -4,131 +4,153 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DIVA — искусство сна</title>
-<meta name="description" content="DIVA. Сатин 300–500 TC, мытый хлопок, лён, бамбук. OEKO-TEX®. Ничего лишнего.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --black:#050505; --white:#f4f1ea;
-    --dim:rgba(244,241,234,.45);
-    --line:rgba(244,241,234,.14);
-    --gold:#b39066;
-    --serif:'Cormorant Garamond',serif;
-    --sans:'Manrope',sans-serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
-  ::selection{background:var(--gold);color:#000}
-  a{color:inherit;text-decoration:none}
-  button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer}
-  .micro{font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--dim);font-weight:300}
-  .wrap{max-width:1400px;margin:0 auto;padding:0 5vw}
-
-  #loader{position:fixed;inset:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:center}
-  #loader span{font-family:var(--serif);font-size:26px;letter-spacing:.55em;color:var(--white);opacity:0;animation:lin 1.4s ease forwards}
-  #loader span:nth-child(2){animation-delay:.12s}#loader span:nth-child(3){animation-delay:.24s}#loader span:nth-child(4){animation-delay:.36s}
-  @keyframes lin{to{opacity:1}}
-
-  #cursor{position:fixed;left:0;top:0;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:99;display:none}
-  @media(pointer:fine){#cursor{display:block}}
-
-  header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:26px 5vw;mix-blend-mode:difference}
-  .logo{font-family:var(--serif);font-size:18px;letter-spacing:.55em;color:#fff}
-  .head-links{display:flex;gap:34px}
-  .head-links a{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .3s}
-  .head-links a:hover{color:#fff}
-  @media(max-width:640px){.head-links a:first-child{display:none}}
-
-  .hero{position:relative;height:100svh;min-height:640px;overflow:hidden;display:flex;align-items:flex-end}
-  .hero-bg{position:absolute;inset:-6%;background:#0a0a0a url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2400&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.5) contrast(1.08) saturate(.85)} /* ← ВАШЕ AI-ФОТО */
-  .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 45%),radial-gradient(120% 90% at 50% 10%,transparent 40%,rgba(0,0,0,.55))}
-  .hero-content{position:relative;z-index:2;padding:0 5vw 12vh;width:100%}
-  .hero .micro{display:block;margin-bottom:26px}
-  h1{font-family:var(--serif);font-weight:300;font-size:clamp(52px,10vw,150px);line-height:.98}
-  h1 em{font-style:italic;color:var(--gold)}
-  .line{overflow:hidden;display:block}
-  .line-inner{display:block;will-change:transform}
-  .scroll-hint{position:absolute;left:50%;bottom:0;z-index:3;width:1px;height:72px;background:var(--line);overflow:hidden}
-  .scroll-hint::after{content:'';position:absolute;inset:0;background:var(--white);transform:translateY(-100%);animation:drop 2.2s cubic-bezier(.76,0,.24,1) infinite}
-  @keyframes drop{40%{transform:translateY(0)}100%{transform:translateY(100%)}}
-
-  .marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0}
-  .marquee-inner{display:flex;gap:70px;white-space:nowrap;width:max-content;animation:mq 36s linear infinite}
-  .marquee span{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim)}
-  .marquee i{color:var(--gold);font-style:normal}
-  @keyframes mq{to{transform:translateX(-50%)}}
-
-  .statement{padding:22vh 0}
-  .statement .big{font-family:var(--serif);font-weight:300;font-size:clamp(38px,7.4vw,104px);line-height:1.08}
-  .statement .big em{font-style:italic;color:var(--dim)}
-
-  .fab-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;padding:0 5vw 40px}
-  .fab-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5.4vw,72px)}
-  .fab-head h2 em{font-style:italic;color:var(--gold)}
-  .fab-tabs{display:flex;gap:26px;flex-wrap:wrap}
-  .fab-btn{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);padding:8px 2px;border-bottom:1px solid transparent;transition:.3s}
-  .fab-btn.active{color:var(--white);border-color:var(--gold)}
-  .fab-viewer{position:relative;height:72vh;min-height:480px;overflow:hidden;cursor:crosshair;touch-action:pan-y}
-  .fab-viewer .sheen{position:absolute;inset:0;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.30),transparent 62%);mix-blend-mode:screen}
-  .fab-300{background:radial-gradient(120% 100% at 70% 15%,rgba(255,255,255,.10),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 1px,transparent 1px 5px),repeating-linear-gradient(-45deg,rgba(0,0,0,.28) 0 1px,transparent 1px 5px),linear-gradient(140deg,#161312,#0b0a09)}
-  .fab-500{background:radial-gradient(120% 100% at 30% 10%,rgba(255,255,255,.14),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 4px),repeating-linear-gradient(-45deg,rgba(0,0,0,.3) 0 1px,transparent 1px 4px),linear-gradient(140deg,#1a171a,#0c0b0d)}
-  .fab-washed{background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.22) 0 2px,transparent 2px 7px),linear-gradient(140deg,#151210,#0d0b0a)}
-  .fab-linen{background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 6px),linear-gradient(140deg,#1a1612,#0e0c09)}
-  .fab-bamboo{background:radial-gradient(120% 100% at 60% 20%,rgba(170,220,205,.10),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.045) 0 1px,transparent 1px 4px),linear-gradient(140deg,#101413,#0a0d0c)}
-  .lens{position:absolute;z-index:4;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,.7);box-shadow:0 10px 40px rgba(0,0,0,.5),inset 0 0 24px rgba(0,0,0,.4);pointer-events:none;opacity:0;transition:opacity .25s;transform:translate(-50%,-50%);background:repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.32) 0 2px,transparent 2px 6px),#12100e}
-  .ripple{position:absolute;z-index:2;width:170px;height:170px;border:1px solid rgba(255,255,255,.5);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:rip .7s ease-out forwards}
-  @keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
-  .fab-info{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:26px 5vw}
-  #fabName{font-family:var(--serif);font-size:clamp(22px,3vw,34px);font-weight:300}
-  #fabDesc{color:var(--dim);font-size:14px;max-width:460px}
-  #fabFeel{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-
-  .film{position:relative;height:110vh;overflow:hidden;background:#000}
-  .film video,.film .film-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6)}
-  .film-fallback{background:#0a0a0a url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2200&auto=format&fit=crop') center/cover no-repeat}
-  .film-caption{position:absolute;left:5vw;bottom:6vh;z-index:2}
-
-  .craft{padding:20vh 0}
-  .craft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-  .craft-item{background:var(--black);padding:44px 34px}
-  .craft-item .n{font-size:11px;letter-spacing:.3em;color:var(--gold)}
-  .craft-item h3{font-family:var(--serif);font-weight:300;font-size:24px;margin:16px 0 10px}
-  .craft-item p{font-size:13px;color:var(--dim);line-height:1.7}
-
-  /* COLLECTION */
-  .collection{padding:18vh 0 10vh}
-  .coll-head{text-align:center;margin-bottom:44px}
-  .coll-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5.4vw,72px)}
-  .coll-head h2 em{font-style:italic;color:var(--gold)}
-  .tc-toggle{display:flex;gap:30px;justify-content:center;margin:34px 0 60px}
-  .tc-btn{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);padding:10px 2px;border-bottom:1px solid transparent;transition:.3s}
-  .tc-btn.active{color:var(--white);border-color:var(--gold)}
-  .coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-  .coll-card{background:var(--black);text-align:left;overflow:hidden;display:block;width:100%;padding:0}
-  .coll-swatch{height:340px;position:relative;overflow:hidden;transition:transform .9s cubic-bezier(.2,.6,.2,1)}
-  .coll-card:hover .coll-swatch{transform:scale(1.05)}
-  .coll-swatch::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 1px,transparent 1px 5px),repeating-linear-gradient(-45deg,rgba(0,0,0,.18) 0 1px,transparent 1px 5px)}
-  .coll-swatch::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 30%,rgba(255,255,255,.16),transparent 70%);opacity:0;transition:opacity .6s}
-  .coll-card:hover .coll-swatch::after{opacity:1}
-  .coll-meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:20px 4px}
-  .coll-name{font-family:var(--serif);font-size:22px;font-weight:300}
-  .coll-price{font-size:12px;letter-spacing:.16em;color:var(--dim);white-space:nowrap}
-  .coll-note{text-align:center;padding:44px 5vw 0;color:var(--dim);font-size:13px}
-
-  .facts{display:flex;justify-content:center;gap:9vw;flex-wrap:wrap;padding:16vh 5vw;text-align:center}
-  .fact b{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(44px,6vw,84px);margin-bottom:14px}
-  .fact b i{font-style:italic;color:var(--gold)}
-
-  .cta{padding:14vh 5vw 20vh;text-align:center}
-  .cta h2{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(34px,5.6vw,72px);margin-bottom:48px}
-  .btn{display:inline-block;padding:18px 52px;border:1px solid var(--line);border-radius:100px;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--white);transition:.4s}
-  .btn:hover{background:var(--white);color:#000;border-color:var(--white)}
-
-  footer{border-top:1px solid var(--line);padding:52px 5vw;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-  footer a:hover{color:var(--white)}
-
-  html.lenis,html.lenis body{height:auto}
-  .lenis.lenis-smooth{scroll-behavior:auto!important}
+:root{--black:#050505;--white:#f4f1ea;--dim:rgba(244,241,234,.45);--line:rgba(244,241,234,.14);--gold:#b39066;--serif:'Cormorant Garamond',serif;--sans:'Manrope',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:#000}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer}
+.micro{font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--dim)}
+.wrap{max-width:1400px;margin:0 auto;padding:0 5vw}
+#loader{position:fixed;inset:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:center}
+#loader span{font-family:var(--serif);font-size:26px;letter-spacing:.55em;opacity:0;animation:lin 1.4s ease forwards}
+#loader span:nth-child(2){animation-delay:.12s}#loader span:nth-child(3){animation-delay:.24s}#loader span:nth-child(4){animation-delay:.36s}
+@keyframes lin{to{opacity:1}}
+#cursor{position:fixed;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:99;display:none}
+@media(pointer:fine){#cursor{display:block}}
+header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:26px 5vw;mix-blend-mode:difference}
+.logo{font-family:var(--serif);font-size:18px;letter-spacing:.55em;color:#fff}
+.head-links{display:flex;gap:30px;align-items:center}
+.head-links a{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.head-links a:hover{color:#fff}
+.cart-btn{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:30px;padding:9px 18px;position:relative}
+.cart-count{position:absolute;top:-7px;right:-7px;background:var(--gold);color:#fff;font-size:10px;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+@media(max-width:640px){.head-links a[href="#fabric"]{display:none}}
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;display:flex;align-items:flex-end}
+.hero-bg{position:absolute;inset:-6%;background:#0a0a0a url('black.jpg') center/cover;filter:brightness(.5) contrast(1.08)}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 45%)}
+.hero-content{position:relative;z-index:2;padding:0 5vw 12vh}
+.hero .micro{display:block;margin-bottom:26px}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(52px,10vw,150px);line-height:.98}
+h1 em{font-style:italic;color:var(--gold)}
+.line{overflow:hidden;display:block}
+.line-inner{display:block;will-change:transform}
+.scroll-hint{position:absolute;left:50%;bottom:0;z-index:3;width:1px;height:72px;background:var(--line);overflow:hidden}
+.scroll-hint::after{content:'';position:absolute;inset:0;background:var(--white);transform:translateY(-100%);animation:drop 2.2s cubic-bezier(.76,0,.24,1) infinite}
+@keyframes drop{40%{transform:translateY(0)}100%{transform:translateY(100%)}}
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0}
+.marquee-inner{display:flex;gap:70px;white-space:nowrap;width:max-content;animation:mq 36s linear infinite}
+.marquee span{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim)}
+.marquee i{color:var(--gold);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+.statement{padding:22vh 0}
+.statement .big{font-family:var(--serif);font-weight:300;font-size:clamp(38px,7.4vw,104px);line-height:1.08}
+.statement .big em{font-style:italic;color:var(--dim)}
+.fab-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;padding:0 5vw 40px}
+.fab-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5.4vw,72px)}
+.fab-head h2 em{font-style:italic;color:var(--gold)}
+.fab-tabs{display:flex;gap:26px;flex-wrap:wrap}
+.fab-btn{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);padding:8px 2px;border-bottom:1px solid transparent;transition:.3s}
+.fab-btn.active{color:var(--white);border-color:var(--gold)}
+.fab-viewer{position:relative;height:72vh;min-height:480px;overflow:hidden;cursor:zoom-in;touch-action:pan-y}
+.fab-layer{position:absolute;inset:0;transition:transform .9s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.fab-layer.zoom{transform:scale(2.6)}
+.fab-viewer .sheen{position:absolute;inset:0;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.3),transparent 62%);mix-blend-mode:screen}
+.fab-300{background:radial-gradient(120% 100% at 70% 15%,rgba(255,255,255,.1),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 1px,transparent 1px 5px),repeating-linear-gradient(-45deg,rgba(0,0,0,.28) 0 1px,transparent 1px 5px),linear-gradient(140deg,#161312,#0b0a09)}
+.fab-500{background:radial-gradient(120% 100% at 30% 10%,rgba(255,255,255,.14),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 4px),repeating-linear-gradient(-45deg,rgba(0,0,0,.3) 0 1px,transparent 1px 4px),linear-gradient(140deg,#1a171a,#0c0b0d)}
+.fab-washed{background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 6px),repeating-linear-gradient(90deg,rgba(0,0,0,.22) 0 2px,transparent 2px 7px),linear-gradient(140deg,#151210,#0d0b0a)}
+.fab-linen{background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 2px,transparent 2px 9px),repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 6px),linear-gradient(140deg,#1a1612,#0e0c09)}
+.fab-bamboo{background:radial-gradient(120% 100% at 60% 20%,rgba(170,220,205,.1),transparent 55%),repeating-linear-gradient(45deg,rgba(255,255,255,.045) 0 1px,transparent 1px 4px),linear-gradient(140deg,#101413,#0a0d0c)}
+.ripple{position:absolute;z-index:2;width:170px;height:170px;border:1px solid rgba(255,255,255,.5);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:rip .7s ease-out forwards}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.fab-hint{position:absolute;left:24px;bottom:20px;z-index:3;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);border-radius:14px;padding:10px 16px;pointer-events:none}
+.fab-info{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:26px 5vw}
+#fabName{font-family:var(--serif);font-size:clamp(22px,3vw,34px);font-weight:300}
+#fabDesc{color:var(--dim);font-size:14px;max-width:460px}
+#fabFeel{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.film{position:relative;height:110vh;overflow:hidden;background:#000}
+.film video,.film .film-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6)}
+.film-fallback{background:#0a0a0a url('room-white.jpg') center/cover no-repeat}
+.film-caption{position:absolute;left:5vw;bottom:6vh;z-index:2}
+.craft{padding:20vh 0}
+.craft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.craft-item{background:var(--black);padding:44px 34px}
+.craft-item .n{font-size:11px;letter-spacing:.3em;color:var(--gold)}
+.craft-item h3{font-family:var(--serif);font-weight:300;font-size:24px;margin:16px 0 10px}
+.craft-item p{font-size:13px;color:var(--dim);line-height:1.7}
+.collection{padding:18vh 0 10vh}
+.coll-head{text-align:center;margin-bottom:44px}
+.coll-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5.4vw,72px)}
+.coll-head h2 em{font-style:italic;color:var(--gold)}
+.tc-toggle{display:flex;gap:30px;justify-content:center;margin:34px 0 60px}
+.tc-btn{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);padding:10px 2px;border-bottom:1px solid transparent;transition:.3s}
+.tc-btn.active{color:var(--white);border-color:var(--gold)}
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.coll-card{background:var(--black);text-align:left;overflow:hidden;display:block;width:100%;padding:0}
+.coll-swatch{height:380px;position:relative;overflow:hidden;background-size:cover;background-position:center;transition:transform .9s cubic-bezier(.2,.6,.2,1)}
+.coll-card:hover .coll-swatch{transform:scale(1.05)}
+.coll-swatch::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 30%,rgba(255,255,255,.14),transparent 70%);opacity:0;transition:opacity .6s}
+.coll-card:hover .coll-swatch::after{opacity:1}
+.coll-meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:20px 4px}
+.coll-name{font-family:var(--serif);font-size:22px;font-weight:300}
+.coll-price{font-size:12px;letter-spacing:.16em;color:var(--dim);white-space:nowrap}
+.coll-note{text-align:center;padding:44px 5vw 0;color:var(--dim);font-size:13px}
+.facts{display:flex;justify-content:center;gap:9vw;flex-wrap:wrap;padding:16vh 5vw;text-align:center}
+.fact b{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(44px,6vw,84px);margin-bottom:14px}
+.fact b i{font-style:italic;color:var(--gold)}
+.cta{padding:14vh 5vw 20vh;text-align:center}
+.cta h2{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(34px,5.6vw,72px);margin-bottom:48px}
+.btn{display:inline-block;padding:18px 52px;border:1px solid var(--line);border-radius:100px;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--white);transition:.4s}
+.btn:hover{background:var(--white);color:#000;border-color:var(--white)}
+footer{border-top:1px solid var(--line);padding:52px 5vw;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer a:hover{color:var(--white)}
+.pmodal{position:fixed;inset:0;z-index:90;background:var(--black);overflow-y:auto;display:none}
+.pmodal.open{display:block}
+.pm-close{position:fixed;top:22px;right:5vw;font-size:28px;color:var(--dim);z-index:5}
+.pm-close:hover{color:var(--white)}
+.pm-wrap{max-width:1200px;margin:0 auto;padding:90px 5vw 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:60px}
+@media(max-width:900px){.pm-wrap{grid-template-columns:1fr;gap:30px;padding-top:80px}}
+.pm-main{width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.92)}
+.pm-thumbs{display:flex;gap:10px;margin-top:10px}
+.pm-thumb{width:76px;height:56px;object-fit:cover;opacity:.45;border:1px solid transparent;cursor:pointer}
+.pm-thumb.active{opacity:1;border-color:var(--gold)}
+.pm-name{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4vw,48px);margin:6px 0 8px}
+.pm-price{font-size:14px;letter-spacing:.14em;color:var(--gold);margin-bottom:28px}
+.pm-label{margin:18px 0 10px}
+.pm-opts{display:flex;gap:10px;flex-wrap:wrap}
+.dot{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);cursor:pointer;transition:.2s}
+.dot.active{border-color:var(--gold);box-shadow:0 0 0 3px rgba(179,144,102,.25)}
+.pill{border:1px solid var(--line);border-radius:20px;padding:8px 16px;font-size:12px;cursor:pointer;transition:.2s}
+.pill.active{background:var(--white);color:#000;border-color:var(--white)}
+.pm-add{display:block;width:100%;margin-top:30px;padding:17px;border:1px solid var(--gold);border-radius:100px;color:var(--gold);font-size:11px;letter-spacing:.34em;text-transform:uppercase;transition:.3s}
+.pm-add:hover{background:var(--gold);color:#000}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.3s;z-index:95}
+.overlay.show{opacity:1;pointer-events:auto}
+.cart{position:fixed;top:0;right:-460px;width:440px;max-width:100%;height:100%;background:#0c0c0c;border-left:1px solid var(--line);z-index:96;transition:right .35s;display:flex;flex-direction:column}
+.cart.open{right:0}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:24px;border-bottom:1px solid var(--line)}
+.cart-head h3{font-family:var(--serif);font-weight:300;font-size:24px}
+.cart-close{font-size:26px;color:var(--dim)}
+.cart-items{flex:1;overflow-y:auto;padding:20px 24px}
+.cart-empty{text-align:center;color:var(--dim);padding:60px 20px}
+.ci{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.ci-name{font-weight:400;font-size:14px}
+.ci-meta{font-size:12px;color:var(--dim);margin-top:2px}
+.ci-controls{display:flex;align-items:center;gap:10px;margin-top:8px}
+.qty-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);cursor:pointer;font-size:14px;line-height:1}
+.ci-remove{color:#8a4a4a;font-size:12px;text-decoration:underline}
+.ci-price{font-weight:400;white-space:nowrap}
+.cart-foot{padding:24px;border-top:1px solid var(--line)}
+.cart-total{display:flex;justify-content:space-between;font-family:var(--serif);font-size:20px;margin-bottom:16px}
+.wa-btn{display:block;width:100%;background:#23a455;color:#fff;text-align:center;border-radius:34px;padding:16px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:.2s}
+.wa-btn:hover{background:#1c8a47}
+.cart-note{font-size:12px;color:var(--dim);text-align:center;margin-top:10px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--white);color:#000;padding:13px 28px;border-radius:30px;font-size:13px;opacity:0;transition:.35s;z-index:120;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
 </style>
 </head>
 <body>
@@ -141,7 +163,7 @@
   <nav class="head-links">
     <a href="#fabric">Ткань</a>
     <a href="#collection">Коллекция</a>
-    <a href="https://wa.me/79236316136" target="_blank">Связаться</a>
+    <button class="cart-btn" onclick="toggleCart(true)">Корзина <span class="cart-count" id="cartCount">0</span></button>
   </nav>
 </header>
 
@@ -183,9 +205,10 @@
       <button class="fab-btn" data-fab="bamboo">Бамбук</button>
     </div>
   </div>
-  <div class="fab-viewer fab-300" id="fabViewer">
+  <div class="fab-viewer" id="fabViewer">
+    <div class="fab-layer fab-300" id="fabLayer"></div>
     <div class="sheen"></div>
-    <div class="lens"></div>
+    <div class="fab-hint micro">нажмите и держите — ткань приблизится</div>
   </div>
   <div class="fab-info">
     <div>
@@ -196,7 +219,6 @@
   </div>
 </section>
 
-<!-- Кино-акт II: прикосновение (touch.mp4) -->
 <section class="film" id="filmTouch">
   <video muted loop playsinline preload="metadata"><source src="touch.mp4" type="video/mp4"></video>
   <div class="film-caption micro">Прикосновение</div>
@@ -219,18 +241,15 @@
   </div>
 </section>
 
-<!-- COMPONENT: Collection -->
 <section class="collection" id="collection">
   <div class="wrap">
-    <div class="coll-head" data-reveal>
-      <h2>Коллекция <em>№1</em></h2>
-    </div>
+    <div class="coll-head" data-reveal><h2>Коллекция <em>№1</em></h2></div>
     <div class="tc-toggle" data-reveal>
       <button class="tc-btn active" data-tc="300">300 TC</button>
       <button class="tc-btn" data-tc="500">500 TC</button>
     </div>
     <div class="coll-grid" id="collGrid"></div>
-    <p class="coll-note" data-reveal>Нажмите на оттенок — откроется WhatsApp с готовым сообщением о заказе.</p>
+    <p class="coll-note" data-reveal>Нажмите на оттенок — откроется карточка товара с галереей, размерами и корзиной.</p>
   </div>
 </section>
 
@@ -250,29 +269,75 @@
   <span class="micro"><a href="https://wa.me/79236316136" target="_blank">WhatsApp</a> &nbsp;·&nbsp; <a href="https://t.me/Stykket" target="_blank">Telegram</a> &nbsp;·&nbsp; <a href="tel:+79236316136">+7 923 631-61-36</a></span>
 </footer>
 
+<!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
+<div class="pmodal" id="pmodal">
+  <button class="pm-close" onclick="closeProduct()">×</button>
+  <div class="pm-wrap">
+    <div>
+      <img class="pm-main" id="pmMain" src="" alt="">
+      <div class="pm-thumbs" id="pmThumbs"></div>
+    </div>
+    <div>
+      <div class="pm-name" id="pmName"></div>
+      <div class="pm-price" id="pmPrice"></div>
+      <div class="pm-label micro">Цвет</div>
+      <div class="pm-opts" id="pmColors"></div>
+      <div class="pm-label micro">Плотность</div>
+      <div class="pm-opts" id="pmTC"></div>
+      <div class="pm-label micro">Размер</div>
+      <div class="pm-opts" id="pmSizes"></div>
+      <button class="pm-add" onclick="addToCartFromModal()">В корзину</button>
+    </div>
+  </div>
+</div>
+
+<!-- КОРЗИНА -->
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<aside class="cart" id="cartPanel">
+  <div class="cart-head">
+    <h3>Ваш заказ</h3>
+    <button class="cart-close" onclick="toggleCart(false)">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Итого:</span><span id="cartTotal">0 ₽</span></div>
+    <button class="wa-btn" onclick="checkout()">Оформить через WhatsApp</button>
+    <div class="cart-note">Откроется чат с готовым текстом заказа</div>
+  </div>
+</aside>
+
+<div class="toast" id="toast">Добавлено в корзину ✓</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* ====== ВАШИ КОНТАКТЫ И ЦЕНЫ ====== */
+/* ====== ВАШИ ДАННЫЕ ====== */
 const PHONE = '79236316136';
-const PRICES = { '300': 12900, '500': 16900 }; // «от», ₽
-let curTC = '300';
-
-const COLORS = [
-  { name:'Чёрный',          c:'#0d0d0e' },
-  { name:'Графит',          c:'#2f2f32' },
-  { name:'Слоновая кость',  c:'#e6ddcc' },
-  { name:'Пудра',           c:'#d3b7ae' },
-  { name:'Шалфей',          c:'#a5afa0' },
-  { name:'Изумруд',         c:'#24473a' },
+const PRICES = { '300': 12900, '500': 16900 };
+const SIZES = [
+  { name:'1,5-спальный', price:0 },
+  { name:'2-спальный',   price:2000 },
+  { name:'Евро',         price:4000 },
+  { name:'Семейный',     price:5000 },
 ];
-/* =================================== */
+const COLORS = [
+  { name:'Чёрный',         key:'black',    c:'#0d0d0e' },
+  { name:'Графит',         key:'graphite', c:'#2f2f32' },
+  { name:'Слоновая кость', key:'ivory',    c:'#e6ddcc' },
+  { name:'Белый',          key:'white',    c:'#f0ede8' },
+  { name:'Пудра',          key:'powder',   c:'#d3b7ae' },
+  { name:'Шалфей',         key:'sage',     c:'#a5afa0' },
+  { name:'Изумруд',        key:'emerald',  c:'#24473a' },
+];
+/* ========================= */
 
 const fmt = n => n.toLocaleString('ru-RU') + ' ₽';
-const shade = (hex,k=.82) => { const n=parseInt(hex.slice(1),16), f=c=>Math.max(0,Math.round(c*k)); return `rgb(${f(n>>16)},${f(n>>8&255)},${f(n&255)})`; };
+const cart = [];
+let curTC = '300';
+let modalState = { colorIdx:0, tc:'300', sizeIdx:0 };
 
 /* Lenis */
 if(window.Lenis){
@@ -323,26 +388,27 @@ const FABRICS = {
   'bamboo':{ name:'Бамбук',         desc:'Прохлада шёлка и природная гипоаллергенность.', feel:'прохладный · шелковый' },
 };
 const viewer = document.getElementById('fabViewer');
-const lens = viewer.querySelector('.lens');
+const fabLayer = document.getElementById('fabLayer');
 let lastRip = 0, lastVib = 0;
 
 document.querySelectorAll('.fab-btn').forEach(btn => btn.addEventListener('click', () => {
   document.querySelectorAll('.fab-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   const f = FABRICS[btn.dataset.fab];
-  viewer.className = 'fab-viewer fab-' + btn.dataset.fab;
+  fabLayer.className = 'fab-layer fab-' + btn.dataset.fab;
   gsap.fromTo(['#fabName','#fabDesc','#fabFeel'], {autoAlpha:0, y:14}, {autoAlpha:1, y:0, duration:.7, stagger:.08, ease:'power2.out',
     onStart(){ document.getElementById('fabName').textContent = f.name;
                document.getElementById('fabDesc').textContent = f.desc;
                document.getElementById('fabFeel').textContent = f.feel; }});
 }));
 
-viewer.addEventListener('pointermove', e => {
+viewer.addEventListener('pointerdown', e => {
   const r = viewer.getBoundingClientRect();
   const x = e.clientX-r.left, y = e.clientY-r.top;
   viewer.style.setProperty('--mx', x+'px');
   viewer.style.setProperty('--my', y+'px');
-  lens.style.opacity = 1; lens.style.left = x+'px'; lens.style.top = y+'px';
+  fabLayer.classList.add('zoom');
+  fabLayer.style.transformOrigin = `${x}px ${y}px`;
   const t = Date.now();
   if(t-lastRip > 130){
     const s = document.createElement('span');
@@ -351,9 +417,15 @@ viewer.addEventListener('pointermove', e => {
   }
   if(e.pointerType==='touch' && navigator.vibrate && t-lastVib > 90){ navigator.vibrate(4); lastVib = t; }
 });
-viewer.addEventListener('pointerleave', ()=> lens.style.opacity = 0);
+viewer.addEventListener('pointerup', ()=> fabLayer.classList.remove('zoom'));
+viewer.addEventListener('pointerleave', ()=> fabLayer.classList.remove('zoom'));
+viewer.addEventListener('pointermove', e => {
+  const r = viewer.getBoundingClientRect();
+  viewer.style.setProperty('--mx', (e.clientX-r.left)+'px');
+  viewer.style.setProperty('--my', (e.clientY-r.top)+'px');
+});
 
-/* FILM: автоплей в кадре + фолбэки */
+/* FILM */
 document.querySelectorAll('section.film').forEach(sec => {
   const v = sec.querySelector('video'), fb = sec.querySelector('.film-fallback');
   const src = v.querySelector('source');
@@ -372,17 +444,13 @@ const collGrid = document.getElementById('collGrid');
 COLORS.forEach((col,i) => {
   const card = document.createElement('button');
   card.className = 'coll-card';
-  card.setAttribute('data-reveal','');
   card.innerHTML = `
-    <div class="coll-swatch" style="background:linear-gradient(160deg, ${col.c}, ${shade(col.c)})"></div>
+    <div class="coll-swatch" style="background-image:url('${col.key}.jpg')"></div>
     <div class="coll-meta">
       <span class="coll-name">${col.name}</span>
       <span class="coll-price">от ${fmt(PRICES[curTC])}</span>
     </div>`;
-  card.addEventListener('click', () => {
-    const msg = `Здравствуйте! Интересует комплект DIVA: цвет «${col.name}», ${curTC} TC.`;
-    window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
-  });
+  card.addEventListener('click', () => openProduct(i));
   collGrid.appendChild(card);
   gsap.from(card, { y:44, autoAlpha:0, duration:1, delay:i*.08, ease:'power3.out',
     scrollTrigger:{ trigger:collGrid, start:'top 86%' } });
@@ -394,6 +462,93 @@ document.querySelectorAll('.tc-btn').forEach(btn => btn.addEventListener('click'
   curTC = btn.dataset.tc;
   document.querySelectorAll('.coll-price').forEach(p => p.textContent = 'от ' + fmt(PRICES[curTC]));
 }));
+
+/* PRODUCT MODAL */
+function openProduct(colorIdx){
+  modalState = { colorIdx, tc:curTC, sizeIdx:0 };
+  renderModal();
+  document.getElementById('pmodal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeProduct(){
+  document.getElementById('pmodal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function renderModal(){
+  const col = COLORS[modalState.colorIdx];
+  const basePrice = PRICES[modalState.tc];
+  const sizePrice = SIZES[modalState.sizeIdx].price;
+  const total = basePrice + sizePrice;
+
+  document.getElementById('pmName').textContent = col.name;
+  document.getElementById('pmPrice').textContent = fmt(total);
+
+  const imgs = [`${col.key}.jpg`, `bed-${col.key}.jpg`, modalState.colorIdx===6 ? 'spalnya-izumrud.jpg' : `room-${col.key}.jpg`];
+  document.getElementById('pmMain').src = imgs[0];
+  document.getElementById('pmThumbs').innerHTML = imgs.map((src,i)=>`<img class="pm-thumb ${i===0?'active':''}" src="${src}" onclick="switchThumb(this,'${src}')" onerror="this.style.display='none'">`).join('');
+
+  document.getElementById('pmColors').innerHTML = COLORS.map((c,i)=>`<button class="dot ${i===modalState.colorIdx?'active':''}" style="background:${c.c}" onclick="modalState.colorIdx=${i};renderModal()"></button>`).join('');
+  document.getElementById('pmTC').innerHTML = ['300','500'].map(tc=>`<button class="pill ${tc===modalState.tc?'active':''}" onclick="modalState.tc='${tc}';renderModal()">${tc} TC</button>`).join('');
+  document.getElementById('pmSizes').innerHTML = SIZES.map((s,i)=>`<button class="pill ${i===modalState.sizeIdx?'active':''}" onclick="modalState.sizeIdx=${i};renderModal()">${s.name}</button>`).join('');
+}
+function switchThumb(el, src){
+  document.querySelectorAll('.pm-thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pmMain').src = src;
+}
+
+/* CART */
+function addToCartFromModal(){
+  const col = COLORS[modalState.colorIdx];
+  const basePrice = PRICES[modalState.tc];
+  const sizePrice = SIZES[modalState.sizeIdx].price;
+  const total = basePrice + sizePrice;
+  const item = { color:col.name, tc:modalState.tc, size:SIZES[modalState.sizeIdx].name, price:total, qty:1 };
+  const found = cart.find(i=>i.color===item.color && i.tc===item.tc && i.size===item.size);
+  found ? found.qty++ : cart.push(item);
+  updateCart();
+  closeProduct();
+  showToast();
+}
+function changeQty(idx, d){ cart[idx].qty += d; if(cart[idx].qty<=0) cart.splice(idx,1); updateCart(); }
+function removeItem(idx){ cart.splice(idx,1); updateCart(); }
+function updateCart(){
+  const box = document.getElementById('cartItems');
+  document.getElementById('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0);
+  box.innerHTML = !cart.length
+    ? '<div class="cart-empty">Корзина пока пуста.<br>Выберите комплект из коллекции 🤍</div>'
+    : cart.map((i,idx)=>`<div class="ci">
+        <div>
+          <div class="ci-name">${i.color}</div>
+          <div class="ci-meta">${i.tc} TC · ${i.size}</div>
+          <div class="ci-controls">
+            <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+            <span>${i.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+            <button class="ci-remove" onclick="removeItem(${idx})">убрать</button>
+          </div>
+        </div>
+        <div class="ci-price">${fmt(i.price*i.qty)}</div>
+      </div>`).join('');
+  document.getElementById('cartTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
+}
+function toggleCart(open){
+  document.getElementById('cartPanel').classList.toggle('open', open);
+  document.getElementById('overlay').classList.toggle('show', open);
+}
+function checkout(){
+  if(!cart.length){ showToast('Корзина пуста'); return; }
+  const lines = ['Здравствуйте! Хочу заказать постельное бельё DIVA:'];
+  cart.forEach((i,n)=> lines.push(`${n+1}. ${i.color}, ${i.tc} TC, ${i.size}, ${i.qty} шт. — ${fmt(i.price*i.qty)}`));
+  lines.push(`Итого: ${fmt(cart.reduce((s,i)=>s+i.price*i.qty,0))}`);
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+}
+function showToast(msg='Добавлено в корзину ✓'){
+  const t = document.getElementById('toast');
+  if(msg) t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
 
 /* Cursor */
 if(matchMedia('(pointer:fine)').matches){
