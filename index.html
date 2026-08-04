@@ -541,10 +541,23 @@ function toggleCart(open){
 }
 function checkout(){
   if(!cart.length){ showToast('Корзина пуста'); return; }
-  const lines = ['Здравствуйте! Хочу заказать постельное бельё DIVA:'];
+  
+  const lines = ['🛍 Новый заказ в DIVA:'];
   cart.forEach((i,n)=> lines.push(`${n+1}. ${i.color}, ${i.tc} TC, ${i.size}, ${i.qty} шт. — ${fmt(i.price*i.qty)}`));
-  lines.push(`Итого: ${fmt(cart.reduce((s,i)=>s+i.price*i.qty,0))}`);
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+  lines.push(`💰 Итого: ${fmt(cart.reduce((s,i)=>s+i.price*i.qty,0))}`);
+  
+  // Если клиент зашел из Telegram Mini App
+  if (window.Telegram && window.Telegram.WebApp) {
+    const user = window.Telegram.WebApp.initDataUnsafe.user;
+    if (user) {
+      lines.push(`\n👤 Клиент: ${user.first_name} ${user.last_name || ''}`);
+      lines.push(`🆔 Telegram: @${user.username || user.id}`);
+    }
+    window.Telegram.WebApp.showAlert('Заказ сформирован! Перенаправляем в чат для подтверждения...');
+  }
+
+  const msg = encodeURIComponent(lines.join('\n'));
+  window.open(`https://wa.me/${PHONE}?text=${msg}`, '_blank');
 }
 function showToast(msg='Добавлено в корзину ✓'){ const t = document.getElementById('toast'); if(msg) t.textContent = msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2200); }
 
