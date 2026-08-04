@@ -1,0 +1,16 @@
+{
+  "name": "DIVA — Искусство сна",
+  "short_name": "DIVA",
+  "description": "Премиальное постельное бельё 300–500 TC.",
+  "start_url": "/Diva/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "https://stykket.github.io/Diva/black.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
